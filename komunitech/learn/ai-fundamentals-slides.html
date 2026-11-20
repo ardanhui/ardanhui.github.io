@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Fundamentals — Slide Kelas | Komunitech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:           #FFFFFF;
+  --primary:      #1464F0;
+  --primary-dark: #0F4DC4;
+  --primary-light:#E8F1FE;
+  --dark-header:  #1c232d;
+  --heading:      #1c1d1f;
+  --body:         #4a4d52;
+  --muted:        #6a6f73;
+  --border:       #d1d7dc;
+  --border-light: #e8ebed;
+  --sidebar-bg:   #f7f8f9;
+  --white:        #FFFFFF;
+  --green:        #1A8A4A;
+  --green-light:  #F0F9F4;
+  --accent:       #f97316;
+  --accent-light: #fff7ed;
+  --teal:         #0D9488;
+  --teal-light:   #F0FDFA;
+  --radius:       8px;
+  --font:         'Inter', -apple-system, sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Inter', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--white);
+  font-family: var(--font);
+  font-size: 18px; line-height: 1.6;
+  color: var(--body);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden; height: 100vh;
+}
+
+/* ─── TOP NAV ────────────────────────────── */
+.course-nav {
+  height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px;
+  background: var(--white);
+  border-bottom: 1px solid var(--border-light);
+  z-index: 50;
+}
+.course-nav-logo {
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 17px;
+  color: var(--heading); text-decoration: none;
+}
+.course-nav-logo-img {
+  width: 24px; height: 24px;
+  background: var(--primary);
+  border-radius: 5px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-size: 15px;
+}
+.course-nav-links { display: flex; gap: 16px; font-size: 17px; }
+.course-nav-links a { color: var(--muted); text-decoration: none; }
+.course-nav-links a:hover { color: var(--heading); }
+
+/* ─── SLIDE DECK ─────────────────────────── */
+.slide-deck {
+  height: calc(100vh - 52px - 56px);
+  overflow: hidden; position: relative;
+  background: #f0f2f5;
+}
+.slide {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  padding: 48px 56px;
+  opacity: 0; transform: translateX(40px);
+  transition: opacity .4s ease, transform .4s ease;
+  pointer-events: none; overflow-y: auto;
+  display: flex; flex-direction: column;
+  background: var(--white);
+}
+.slide.active { opacity: 1; transform: translateX(0); pointer-events: all; }
+
+/* Cover */
+.slide-cover {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  background: linear-gradient(160deg, #0a1628 0%, #152238 40%, #1c3a5c 100%);
+  color: var(--white);
+}
+.slide-cover .cover-badge {
+  display: inline-block;
+  background: rgba(20,100,240,.25);
+  border: 1px solid rgba(20,100,240,.4);
+  color: #8bb8ff;
+  padding: 6px 18px; border-radius: 100px;
+  font-size: 17px; font-weight: 600; letter-spacing: .5px;
+  margin-bottom: 24px;
+}
+.slide-cover .cover-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 800; color: #f0f4f8;
+  line-height: 1.2; margin-bottom: 14px; max-width: 700px;
+}
+.slide-cover .cover-subtitle {
+  font-size: 17px; color: rgba(255,255,255,.65);
+  max-width: 550px; line-height: 1.6; margin-bottom: 32px;
+}
+.slide-cover .cover-meta {
+  display: flex; gap: 24px; font-size: 17px; color: rgba(255,255,255,.5);
+}
+
+/* Section divider */
+.slide-section {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  background: var(--white);
+}
+.slide-section .section-num {
+  font-family: var(--font-display);
+  font-size: 72px; font-weight: 800;
+  color: var(--primary); opacity: .15; line-height: 1;
+  margin-bottom: -20px;
+}
+.slide-section .section-label {
+  font-family: var(--font-display);
+  font-size: 32px; font-weight: 700;
+  color: var(--heading); margin-bottom: 10px;
+}
+.slide-section .section-desc {
+  font-size: 18px; color: var(--muted); max-width: 500px;
+}
+
+/* Content slide */
+.slide-content {
+  padding: 44px 64px; justify-content: flex-start;
+}
+.slide-content .slide-heading {
+  font-family: var(--font-display);
+  font-size: 28px; font-weight: 700; color: var(--heading);
+  margin-bottom: 8px; line-height: 1.3;
+}
+.slide-content .slide-tag {
+  display: inline-block;
+  font-size: 15px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .8px; color: var(--primary); margin-bottom: 20px;
+}
+
+/* Layout */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 12px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 12px; }
+
+.card {
+  background: var(--sidebar-bg);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius); padding: 20px;
+}
+.card .card-emoji { font-size: 28px; margin-bottom: 8px; }
+.card h4 { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--heading); margin-bottom: 6px; }
+.card p { font-size: 17px; color: var(--body); line-height: 1.6; }
+
+.card-blue { border-left: 4px solid var(--primary); }
+.card-green { border-left: 4px solid var(--green); }
+.card-teal { border-left: 4px solid var(--teal); }
+
+/* Callout */
+.callout {
+  background: var(--primary-light);
+  border-radius: var(--radius); padding: 16px 20px; margin-top: 16px;
+  font-size: 18px; color: var(--heading);
+  display: flex; align-items: flex-start; gap: 10px; line-height: 1.6;
+}
+.callout .callout-icon { font-size: 18px; flex-shrink: 0; }
+
+/* Formula box */
+.formula-box {
+  background: var(--primary-light);
+  border: 2px dashed var(--primary);
+  border-radius: var(--radius); padding: 18px 24px; margin-top: 14px;
+  text-align: center;
+  font-family: var(--font-display); font-size: 16px; font-weight: 700;
+  color: var(--heading);
+}
+
+/* Checklist */
+.check-list {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 8px; margin-top: 14px;
+}
+.check-list li {
+  font-size: 18px; color: var(--body);
+  padding-left: 22px; position: relative; line-height: 1.5;
+}
+.check-list li::before {
+  content: '✓'; position: absolute; left: 0; top: 0;
+  color: var(--green); font-weight: 700;
+}
+
+/* Tags */
+.tags-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.tag {
+  background: var(--sidebar-bg);
+  border: 1px solid var(--border-light);
+  border-radius: 100px; padding: 6px 14px;
+  font-size: 18px; font-weight: 600; color: var(--heading);
+}
+.tag-blue { background: var(--primary-light); border-color: rgba(20,100,240,.2); color: var(--primary); }
+.tag-green { background: var(--green-light); border-color: rgba(26,138,74,.2); color: var(--green); }
+
+/* Table */
+.table-wrap {
+  margin-top: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+}
+.table-row {
+  display: grid; grid-template-columns: 1fr 2fr;
+  padding: 11px 16px; font-size: 17px; color: var(--body);
+  border-bottom: 1px solid var(--border-light); align-items: center;
+}
+.table-row:last-child { border-bottom: none; }
+.table-row.header {
+  background: var(--sidebar-bg); font-weight: 600;
+  color: var(--heading); font-size: 18px; text-transform: uppercase; letter-spacing: .5px;
+}
+.table-row .col:first-child { font-weight: 600; color: var(--heading); }
+
+/* Tool cards */
+.tool-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; }
+.tool-card {
+  background: var(--sidebar-bg); border: 1px solid var(--border-light);
+  border-radius: var(--radius); padding: 18px; text-align: center;
+}
+.tool-card .tool-icon { font-size: 32px; margin-bottom: 6px; }
+.tool-card h5 { font-size: 16px; font-weight: 700; color: var(--heading); margin-bottom: 4px; }
+.tool-card p { font-size: 15px; color: var(--muted); line-height: 1.5; }
+
+/* ─── INTERACTIVE CHECKLIST ──────────────── */
+.icl-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 16px; margin-bottom: 6px;
+  background: var(--white);
+  border: 2px solid var(--border-light);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .15s ease;
+  font-size: 16px; color: var(--body);
+  line-height: 1.6;
+  user-select: none;
+}
+.icl-item:hover { border-color: var(--primary); background: #fafcff; }
+.icl-check {
+  width: 24px; height: 24px;
+  border: 2px solid var(--border);
+  border-radius: 5px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s ease;
+  margin-top: 1px;
+}
+.icl-check svg { width: 14px; height: 14px; opacity: 0; transition: opacity .1s; }
+.icl-item.checked .icl-check {
+  background: var(--green); border-color: var(--green);
+}
+.icl-item.checked .icl-check svg { opacity: 1; }
+.icl-item.checked {
+  border-color: var(--green);
+  background: var(--green-light);
+}
+.icl-item.checked .icl-text { color: var(--green); }
+.icl-text { transition: color .15s; flex: 1; }
+.icl-counter {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 15px; font-weight: 700;
+  color: var(--muted);
+  margin-top: 8px;
+}
+.icl-counter strong { color: var(--green); font-size: 18px; }
+.icl-confetti {
+  text-align: center;
+  padding: 10px;
+  font-size: 16px; font-weight: 700;
+  color: var(--green);
+  display: none;
+  animation: popIn .4s ease;
+}
+@keyframes popIn { 0% { transform: scale(.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+/* QUIZ STYLES */
+.quiz-intro {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+}
+.quiz-intro-icon { font-size: 64px; margin-bottom: 16px; }
+.quiz-intro h2 {
+  font-family: var(--font-display);
+  font-size: 28px; font-weight: 700;
+  color: var(--heading); margin-bottom: 10px;
+}
+.quiz-intro p {
+  font-size: 16px; color: var(--muted);
+  max-width: 500px; line-height: 1.7; margin-bottom: 20px;
+}
+
+.quiz-question {
+  max-width: 700px; margin: 0 auto;
+  padding-top: 20px;
+}
+.quiz-q-num {
+  font-family: var(--font-display);
+  font-size: 14px; font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.quiz-q-text {
+  font-family: var(--font-display);
+  font-size: 22px; font-weight: 700;
+  color: var(--heading);
+  line-height: 1.4; margin-bottom: 24px;
+}
+.quiz-options {
+  display: flex; flex-direction: column; gap: 10px;
+}
+.quiz-option {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 20px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: var(--white);
+  cursor: pointer;
+  transition: all .15s ease;
+  font-size: 16px; color: var(--body);
+  line-height: 1.4;
+}
+.quiz-option:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+.quiz-option .opt-letter {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--sidebar-bg);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px;
+  color: var(--heading);
+  flex-shrink: 0;
+  transition: all .15s ease;
+}
+.quiz-option.selected {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+.quiz-option.selected .opt-letter {
+  background: var(--primary); color: var(--white);
+}
+.quiz-option.correct {
+  border-color: var(--green) !important;
+  background: var(--green-light) !important;
+}
+.quiz-option.correct .opt-letter {
+  background: var(--green); color: var(--white);
+}
+.quiz-option.wrong {
+  border-color: #e03131 !important;
+  background: #fff5f5 !important;
+}
+.quiz-option.wrong .opt-letter {
+  background: #e03131; color: var(--white);
+}
+.quiz-option.locked { pointer-events: none; }
+
+.quiz-feedback {
+  margin-top: 16px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  font-size: 15px; font-weight: 600;
+  display: none;
+  line-height: 1.5;
+}
+.quiz-feedback.show { display: block; }
+.quiz-feedback.correct-fb {
+  background: var(--green-light);
+  color: var(--green);
+  border: 1px solid rgba(26,138,74,.2);
+}
+.quiz-feedback.wrong-fb {
+  background: #fff5f5;
+  color: #c92a2a;
+  border: 1px solid rgba(224,49,49,.2);
+}
+
+.quiz-result {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  height: 100%;
+}
+.quiz-result .result-emoji {
+  font-size: 72px; margin-bottom: 12px;
+}
+.quiz-result .result-title {
+  font-family: var(--font-display);
+  font-size: 30px; font-weight: 800;
+  color: var(--heading); margin-bottom: 8px;
+}
+.quiz-result .result-score {
+  font-size: 48px; font-weight: 800;
+  color: var(--primary);
+  font-family: var(--font-display);
+  margin-bottom: 4px;
+}
+.quiz-result .result-msg {
+  font-size: 16px; color: var(--muted);
+  max-width: 480px; line-height: 1.7; margin-bottom: 20px;
+}
+.quiz-result .result-detail {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  justify-content: center; margin-bottom: 24px;
+}
+.quiz-result .result-dot {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 16px;
+}
+.result-dot.correct-dot { background: var(--green-light); color: var(--green); border: 2px solid var(--green); }
+.result-dot.wrong-dot { background: #fff5f5; color: #e03131; border: 2px solid #e03131; }
+
+/* Bottom bar */
+.bottom-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  height: 56px;
+  background: var(--white);
+  border-top: 1px solid var(--border-light);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; z-index: 100;
+}
+.bottom-bar-info {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 17px; color: var(--muted);
+}
+#slide-counter { font-weight: 600; color: var(--heading); }
+.progress-track {
+  width: 180px; height: 4px;
+  background: var(--border-light); border-radius: 2px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: var(--primary);
+  border-radius: 2px; transition: width .3s ease;
+}
+.bottom-bar-btns { display: flex; gap: 8px; }
+.bar-btn {
+  padding: 8px 20px;
+  border: 1px solid var(--border); border-radius: 6px;
+  background: var(--white);
+  font-family: var(--font-display); font-size: 17px; font-weight: 600;
+  color: var(--heading); cursor: pointer; transition: all .2s;
+}
+.bar-btn:hover { background: var(--sidebar-bg); }
+.bar-btn.primary {
+  background: var(--primary); color: var(--white); border-color: var(--primary);
+}
+.bar-btn.primary:hover { background: var(--primary-dark); }
+.bar-btn:disabled { opacity: .35; cursor: default; pointer-events: none; }
+
+/* CTA slide */
+.slide-cta {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  background: linear-gradient(160deg, #1c3a5c 0%, #0a1628 100%);
+  color: var(--white);
+}
+.slide-cta h2 {
+  font-family: var(--font-display);
+  font-size: 28px; font-weight: 700; color: #f0f4f8;
+  margin-bottom: 12px; max-width: 600px; line-height: 1.3;
+}
+.slide-cta p {
+  font-size: 18px; color: rgba(255,255,255,.7);
+  max-width: 500px; line-height: 1.6; margin-bottom: 24px;
+}
+.slide-cta .cta-btn {
+  display: inline-block;
+  background: var(--primary);
+  color: var(--white);
+  font-family: var(--font-display); font-weight: 700; font-size: 17px;
+  padding: 14px 36px; border-radius: 8px;
+  text-decoration: none; transition: all .2s;
+}
+.slide-cta .cta-btn:hover { background: var(--primary-dark); transform: scale(1.03); }
+.slide-cta .cta-sub {
+  font-size: 17px; color: rgba(255,255,255,.4); margin-top: 12px;
+}
+
+@media (max-width: 900px) {
+  .slide-content { padding: 36px 28px; }
+  .grid-2, .grid-3, .tool-grid { grid-template-columns: 1fr; }
+  .slide-cover .cover-title { font-size: 28px; }
+  .slide-content .slide-heading { font-size: 24px; }
+}
+@media (max-width: 600px) {
+  .slide-content { padding: 28px 18px; }
+  .course-nav-links { display: none; }
+  .progress-track { width: 100px; }
+}
+/* ─── PRINT / PDF (untuk download slide) ─────────────── */
+@page { size: A4 landscape; margin: 12mm; }
+@media print {
+  body { overflow: visible !important; height: auto !important; background: #fff !important; font-size: 12pt; }
+  .course-nav, .bottom-bar { display: none !important; }
+  .slide-deck { height: auto !important; overflow: visible !important; background: #fff !important; position: static !important; }
+  .slide {
+    position: relative !important;
+    top: auto !important; left: auto !important; right: auto !important; bottom: auto !important;
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: 0 !important;
+    page-break-after: always;
+    padding: 16px 8px !important;
+  }
+  .slide:last-child { page-break-after: auto; }
+  .slide-cover, .slide-cta { color: #fff !important; }
+  .slide-cover .cover-subtitle, .slide-cta p, .slide-cover .cover-meta { color: rgba(255,255,255,.8) !important; }
+  .quiz-feedback { display: none !important; }
+  .quiz-option { cursor: default; }
+  .quiz-option[data-correct] .opt-letter { background: var(--green) !important; color: #fff !important; }
+  .quiz-option[data-correct]::after { content: "  ✓ Jawaban benar"; color: var(--green); font-weight: 700; font-size: 11px; }
+  .icl-item { cursor: default; }
+  .icl-counter, .icl-confetti { display: none !important; }
+  .quiz-intro, .quiz-result { height: auto !important; }
+}
+</style>
+</head>
+<body>
+
+<nav class="course-nav">
+  <a href="/komunitech/course/ai-fundamentals" class="course-nav-logo">
+    <span class="course-nav-logo-img">K</span>
+    AI Fundamentals · Slide Kelas
+  </a>
+  <div class="course-nav-links">
+    <a href="/komunitech/course/ai-fundamentals">← Kembali ke Detail</a>
+    <a href="/komunitech/">Katalog</a>
+    <a href="ai-fundamentals-slides.pdf" download>⬇ Download PDF</a>
+  </div>
+</nav>
+
+<div class="slide-deck" id="slideDeck">
+
+<!-- SLIDE 0: COVER -->
+<div class="slide slide-cover active" data-slide="0">
+  <div class="cover-badge">🌱 GRATIS · PEMULA · 2 MODUL INTI</div>
+  <h1 class="cover-title">AI Fundamentals</h1>
+  <p class="cover-subtitle">Kenali & Kuasai Dasar AI dari Nol.<br>Dari "AI itu apa?" sampai bisa pakai 5+ tools AI dengan percaya diri.</p>
+  <div class="cover-meta">
+    <span>📚 2 Modul Inti</span>
+    <span>🛠️ 5+ Tools</span>
+    <span>⏱️ ~60 Menit</span>
+    <span>📝 Step-by-Step</span>
+  </div>
+</div>
+
+<!-- SLIDE 1: WELCOME -->
+<div class="slide slide-content" data-slide="1">
+  <span class="slide-tag">SELAMAT DATANG</span>
+  <h2 class="slide-heading">AI Itu Bukan Cuma Buat Orang Tech</h2>
+  <p style="font-size:15px;color:var(--body);line-height:1.7;max-width:680px;">
+    AI udah ada di mana-mana — ChatGPT, Copilot, Gemini — tapi kamu masih bingung mulai dari mana? Kelas ini dirancang khusus buat kamu yang mulai dari <strong>NOL</strong>.
+  </p>
+
+  <div class="grid-2" style="margin-top:24px;">
+    <div>
+      <h3 style="font-size:16px;font-weight:700;color:var(--heading);margin-bottom:8px;">Apa yang kamu dapet:</h3>
+      <ul class="check-list">
+        <li>Paham apa itu AI — kemampuan & batasannya</li>
+        <li>Bisa pakai ChatGPT dan 5 tools AI gratis</li>
+        <li>Praktik langsung, bukan cuma teori</li>
+        <li>Fundasi solid buat lanjut ke kelas monetisasi</li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="font-size:16px;font-weight:700;color:var(--heading);margin-bottom:8px;">Yang nggak kamu butuhin:</h3>
+      <ul class="check-list">
+        <li>❌ Background IT / coding</li>
+        <li>❌ Pengalaman AI sebelumnya</li>
+        <li>❌ Laptop mahal (HP cukup!)</li>
+        <li>❌ Modal sepeser pun</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:20px;">
+    <span class="callout-icon">⭐</span>
+    <span>Kelas ini <strong>100% GRATIS</strong>. Misi kita sederhana: semakin banyak orang Indonesia melek AI, semakin besar peluang kita semua.</span>
+  </div>
+</div>
+
+<!-- SLIDE 2: MODUL 1 HEADER -->
+<div class="slide slide-section" data-slide="2">
+  <div class="section-num">01</div>
+  <div class="section-label">Apa Itu AI & Kenapa Kamu Harus Peduli</div>
+  <p class="section-desc">3 pelajaran · 15 menit · Pondasi paling penting</p>
+</div>
+
+<!-- SLIDE 3: AI VS MANUSIA -->
+<div class="slide slide-content" data-slide="3">
+  <span class="slide-tag">MODUL 1 · PELAJARAN 1</span>
+  <h2 class="slide-heading">AI vs Manusia — Apa yang AI Bisa (dan Nggak Bisa)</h2>
+
+  <div class="grid-2" style="margin-top:16px;">
+    <div class="card card-green">
+      <h4>✅ Yang AI Bisa</h4>
+      <ul class="check-list">
+        <li>Nulis teks, bikin konten, translate</li>
+        <li>Jawab pertanyaan, jelasin konsep</li>
+        <li>Ringkas dokumen panjang</li>
+        <li>Generate ide & brainstorming</li>
+        <li>Analisis data sederhana</li>
+        <li>Bantu coding & debugging</li>
+      </ul>
+    </div>
+    <div class="card card-blue" style="border-left-color: #e03131;">
+      <h4 style="color:#c92a2a;">❌ Yang AI Nggak Bisa</h4>
+      <ul class="check-list" style="--green:#c92a2a;">
+        <li style="color:var(--body);">Berpikir atau "ngerti" seperti manusia</li>
+        <li style="color:var(--body);">Ambil keputusan etis sendiri</li>
+        <li style="color:var(--body);">Verifikasi fakta 100% akurat</li>
+        <li style="color:var(--body);">Gantiin kreativitas & empati manusia</li>
+        <li style="color:var(--body);">Jaga privasi tanpa diarahkan</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:14px;">
+    <span class="callout-icon">💡</span>
+    <span>AI adalah <strong>copilot</strong>, bukan autopilot. Kamu tetap pilotnya — AI bantu kamu terbang lebih cepat dan efisien.</span>
+  </div>
+</div>
+
+<!-- SLIDE 4: KENAPA SEKARANG -->
+<div class="slide slide-content" data-slide="4">
+  <span class="slide-tag">MODUL 1 · PELAJARAN 2</span>
+  <h2 class="slide-heading">Kenapa Tahun Ini Adalah Waktu Terbaik Belajar AI</h2>
+
+  <div class="grid-3" style="margin-top:20px;">
+    <div class="card card-blue">
+      <div class="card-emoji">💰</div>
+      <h4>Gratis & Terjangkau</h4>
+      <p>ChatGPT, Claude, Gemini — semua gratis. Dulu tools AI mahal, sekarang bisa diakses siapa aja.</p>
+    </div>
+    <div class="card card-green">
+      <div class="card-emoji">📈</div>
+      <h4>Skill Paling Dicari</h4>
+      <p>Perusahaan cari orang yang bisa pakai AI. Ini skill wajib 2026 ke atas, bukan nice-to-have lagi.</p>
+    </div>
+    <div class="card card-teal">
+      <div class="card-emoji">⏰</div>
+      <h4>Early Mover Advantage</h4>
+      <p>Mayoritas orang Indonesia masih belum pakai AI serius. Kamu bisa jadi yang terdepan.</p>
+    </div>
+  </div>
+
+  <div class="formula-box" style="margin-top:24px;">
+    🎯 <strong>Fakta:</strong> 80% pekerjaan akan terpengaruh AI dalam 5 tahun ke depan.<br>
+    Pertanyaannya bukan "apakah AI akan gantiin aku?" tapi "apakah aku bisa pakai AI lebih baik dari yang lain?"
+  </div>
+</div>
+
+<!-- SLIDE 5: LANGKAH AKSI 1 — CHECKLIST INTERAKTIF -->
+<div class="slide slide-content" data-slide="5">
+  <span class="slide-tag">MODUL 1 · LANGKAH AKSI</span>
+  <h2 class="slide-heading">Buat Akun ChatGPT & Kenalan</h2>
+
+  <div style="margin-top:14px;max-width:650px;">
+    <p style="font-size:16px;color:var(--muted);margin-bottom:14px;">Centang setiap langkah setelah kamu selesai 👇</p>
+
+    <div id="checklist-1">
+      <div class="icl-item" onclick="this.classList.toggle('checked'); updateChecklist1()">
+        <div class="icl-check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+        <span class="icl-text">Buka <strong>chat.openai.com</strong> atau download app ChatGPT di HP</span>
+      </div>
+      <div class="icl-item" onclick="this.classList.toggle('checked'); updateChecklist1()">
+        <div class="icl-check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+        <span class="icl-text">Klik <strong>Sign Up</strong> — pakai Google / Gmail / Email</span>
+      </div>
+      <div class="icl-item" onclick="this.classList.toggle('checked'); updateChecklist1()">
+        <div class="icl-check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+        <span class="icl-text">Verifikasi nomor HP</span>
+      </div>
+      <div class="icl-item" onclick="this.classList.toggle('checked'); updateChecklist1()">
+        <div class="icl-check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+        <span class="icl-text">Masuk ke dashboard ChatGPT — kamu udah bisa chat!</span>
+      </div>
+      <div class="icl-item" onclick="this.classList.toggle('checked'); updateChecklist1()">
+        <div class="icl-check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+        <span class="icl-text">Coba chat pertama: <em>"Halo! Jelaskan siapa kamu dan apa yang bisa kamu bantu"</em></span>
+      </div>
+      <div class="icl-item" onclick="this.classList.toggle('checked'); updateChecklist1()">
+        <div class="icl-check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+        <span class="icl-text">Eksplorasi bebas — tanya apa aja yang kamu penasaran!</span>
+      </div>
+    </div>
+
+    <div class="icl-counter" id="cl1-counter">✅ <strong>0</strong> / 6 langkah selesai</div>
+    <div class="icl-confetti" id="cl1-done">🎉 Mantap! Akun ChatGPT kamu udah siap. Lanjut ke Modul 2!</div>
+
+    <div style="margin-top:14px;">
+      <span class="tag tag-blue">💬 ChatGPT</span>
+      <span class="tag tag-green">🆓 100% Gratis</span>
+      <span class="tag">📱 App Store & Play Store</span>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: MODUL 2 HEADER -->
+<div class="slide slide-section" data-slide="6">
+  <div class="section-num">02</div>
+  <div class="section-label">5 Tools AI Wajib yang Gratis</div>
+  <p class="section-desc">5 pelajaran · 25 menit · Setup toolkit AI kamu</p>
+</div>
+
+<!-- SLIDE 7: CHATGPT VS CLAUDE VS GEMINI -->
+<div class="slide slide-content" data-slide="7">
+  <span class="slide-tag">MODUL 2 · PELAJARAN 1</span>
+  <h2 class="slide-heading">ChatGPT, Claude, Gemini — Pilih yang Mana?</h2>
+
+  <div class="tool-grid" style="margin-top:16px;">
+    <div class="tool-card">
+      <div class="tool-icon">💬</div>
+      <h5>ChatGPT</h5>
+      <p>Paling serbaguna. Nulis, riset, coding, brainstorming. Pilihan utama buat sehari-hari.</p>
+      <span class="tag tag-green" style="margin-top:8px;">⭐ Recommended</span>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">📝</div>
+      <h5>Claude</h5>
+      <p>Jago nulis panjang & analisis dokumen. Cocok buat laporan, esai, konten mendalam.</p>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🔍</div>
+      <h5>Gemini</h5>
+      <p>Terintegrasi Google. Bisa akses info real-time. Cocok buat research + ekosistem Google.</p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:16px;">
+    <span class="callout-icon">💡</span>
+    <span><strong>Rule of thumb:</strong> Mulai dari ChatGPT untuk semuanya. Pakai Claude kalau perlu nulis panjang/analitis. Pakai Gemini kalau butuh info terkini + terintegrasi Google.</span>
+  </div>
+</div>
+
+<!-- SLIDE 8: TOOLS LAINNYA -->
+<div class="slide slide-content" data-slide="8">
+  <span class="slide-tag">MODUL 2 · PELAJARAN 2-4</span>
+  <h2 class="slide-heading">Tools Desain, Riset, Presentasi — Gratis!</h2>
+
+  <div class="grid-2" style="margin-top:16px;">
+    <div class="card card-blue">
+      <div class="card-emoji">🎨</div>
+      <h4>Canva AI</h4>
+      <p>Desain profesional tanpa jasa desainer. Magic Write buat teks, AI Image Generator buat gambar, template instan. Dari poster, feed IG, sampai presentasi.</p>
+    </div>
+    <div class="card card-green">
+      <div class="card-emoji">🔬</div>
+      <h4>Perplexity</h4>
+      <p>Research & riset 10x lebih cepat. Kayak Google tapi langsung dikasih jawaban + sumber terpercaya. Wajib buat riset pasar, kompetitor, atau belajar topik baru.</p>
+    </div>
+    <div class="card card-teal">
+      <div class="card-emoji">📊</div>
+      <h4>Gamma</h4>
+      <p>Bikin presentasi profesional dalam hitungan detik. Tinggal ketik topik, Gamma generate slide deck lengkap dengan desain, teks, dan gambar.</p>
+    </div>
+    <div class="card card-blue">
+      <div class="card-emoji">📋</div>
+      <h4>Notion AI</h4>
+      <p>Dokumen, catatan, project management — semua dengan AI built-in. Rangkum meeting, generate to-do list, tulis draft proposal — semua dari satu tempat.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: LANGKAH AKSI 2 — CHECKLIST TOOLS -->
+<div class="slide slide-content" data-slide="9">
+  <span class="slide-tag">MODUL 2 · LANGKAH AKSI</span>
+  <h2 class="slide-heading">Setup Semua Tools & Coba Fitur Utama</h2>
+
+  <div style="margin-top:12px;max-width:700px;">
+    <p style="font-size:16px;color:var(--muted);margin-bottom:12px;">Centang setiap tools setelah kamu setup dan coba 👇</p>
+
+    <div id="checklist-2">
+      <div class="icl-item" onclick="this.classList.toggle('checked'); updateChecklist2()">
+        <div class="icl-check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+        <span class="icl-text"><strong>ChatGPT</strong> — udah punya akun (dari Modul 1) ✅</span>
+      </div>
+      <div class="icl-item" onclick="this.classList.toggle('checked'); updateChecklist2()">
+        <div class="icl-check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+        <span class="icl-text"><strong>Canva</strong> — daftar di <em>canva.com</em> (gratis!) → coba fitur <strong>Magic Write</strong></span>
+      </div>
+      <div class="icl-item" onclick="this.classList.toggle('checked'); updateChecklist2()">
+        <div class="icl-check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+        <span class="icl-text"><strong>Perplexity</strong> — buka <em>perplexity.ai</em> → tanya 1 topik yang kamu penasaran</span>
+      </div>
+      <div class="icl-item" onclick="this.classList.toggle('checked'); updateChecklist2()">
+        <div class="icl-check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+        <span class="icl-text"><strong>Gamma</strong> — buka <em>gamma.app</em> → buat 1 slide presentasi tentang hobimu</span>
+      </div>
+      <div class="icl-item" onclick="this.classList.toggle('checked'); updateChecklist2()">
+        <div class="icl-check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+        <span class="icl-text"><strong>Claude</strong> — daftar di <em>claude.ai</em> → minta Claude jelasin 1 topik dengan analogi sederhana</span>
+      </div>
+      <div class="icl-item" onclick="this.classList.toggle('checked'); updateChecklist2()">
+        <div class="icl-check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+        <span class="icl-text"><strong>Notion AI</strong> — daftar <em>notion.so</em> → coba fitur AI untuk bikin to-do list</span>
+      </div>
+    </div>
+
+    <div class="icl-counter" id="cl2-counter">✅ <strong>0</strong> / 6 tools siap</div>
+    <div class="icl-confetti" id="cl2-done">🎉 Keren! Semua tools udah siap. Kamu punya toolkit AI lengkap sekarang!</div>
+
+    <div style="margin-top:12px;">
+      <span class="tag tag-green">🎯 Target: setup 6 tools dalam 1 jam</span>
+      <span class="tag tag-blue">🆓 Semua GRATIS</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== QUIZ SECTION ===== -->
+
+<!-- SLIDE 10: QUIZ INTRO -->
+<div class="slide slide-content" data-slide="10">
+  <div class="quiz-intro" style="height:100%;">
+    <div class="quiz-intro-icon">📝</div>
+    <h2>Uji Pemahaman Kamu</h2>
+    <p>Sebelum lanjut ke course berikutnya, jawab 5 pertanyaan ini buat mastiin kamu udah paham fundamental AI.</p>
+    <div style="display:flex;gap:12px;align-items:center;font-size:16px;color:var(--muted);">
+      <span>✅ ≥3/5 = siap lanjut</span>
+      <span>·</span>
+      <span>📖 &lt;3/5 = review dulu</span>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11: QUIZ Q1 -->
+<div class="slide slide-content" data-slide="11">
+  <div class="quiz-question">
+    <div class="quiz-q-num">Pertanyaan 1 / 5</div>
+    <div class="quiz-q-text">Mana yang <em>bukan</em> kemampuan AI saat ini?</div>
+    <div class="quiz-options" id="q1-options">
+      <div class="quiz-option" onclick="selectAnswer(this, 1, 1)"><span class="opt-letter">A</span> Nulis teks dan bikin konten</div>
+      <div class="quiz-option" data-correct="true" onclick="selectAnswer(this, 1, 1)"><span class="opt-letter">B</span> Berpikir dan "ngerti" seperti manusia</div>
+      <div class="quiz-option" onclick="selectAnswer(this, 1, 1)"><span class="opt-letter">C</span> Ringkas dokumen panjang</div>
+      <div class="quiz-option" onclick="selectAnswer(this, 1, 1)"><span class="opt-letter">D</span> Analisis data sederhana</div>
+    </div>
+    <div class="quiz-feedback correct-fb" id="fb-1"><span id="fb-text-1"></span></div>
+  </div>
+</div>
+
+<!-- SLIDE 12: QUIZ Q2 -->
+<div class="slide slide-content" data-slide="12">
+  <div class="quiz-question">
+    <div class="quiz-q-num">Pertanyaan 2 / 5</div>
+    <div class="quiz-q-text">AI sebaiknya dipandang sebagai apa dalam pekerjaan kita?</div>
+    <div class="quiz-options" id="q2-options">
+      <div class="quiz-option" onclick="selectAnswer(this, 2, 1)"><span class="opt-letter">A</span> Pengganti manusia sepenuhnya</div>
+      <div class="quiz-option" data-correct="true" onclick="selectAnswer(this, 2, 1)"><span class="opt-letter">B</span> Copilot — bantu kita bekerja lebih efisien</div>
+      <div class="quiz-option" onclick="selectAnswer(this, 2, 1)"><span class="opt-letter">C</span> Mesin yang selalu 100% benar</div>
+      <div class="quiz-option" onclick="selectAnswer(this, 2, 1)"><span class="opt-letter">D</span> Hanya untuk programmer dan orang tech</div>
+    </div>
+    <div class="quiz-feedback correct-fb" id="fb-2"><span id="fb-text-2"></span></div>
+  </div>
+</div>
+
+<!-- SLIDE 13: QUIZ Q3 -->
+<div class="slide slide-content" data-slide="13">
+  <div class="quiz-question">
+    <div class="quiz-q-num">Pertanyaan 3 / 5</div>
+    <div class="quiz-q-text">Kenapa tahun ini disebut waktu terbaik untuk mulai belajar AI?</div>
+    <div class="quiz-options" id="q3-options">
+      <div class="quiz-option" onclick="selectAnswer(this, 3, 1)"><span class="opt-letter">A</span> Karena AI akan segera punah</div>
+      <div class="quiz-option" onclick="selectAnswer(this, 3, 1)"><span class="opt-letter">B</span> Karena semua pekerjaan sudah diambil alih AI</div>
+      <div class="quiz-option" data-correct="true" onclick="selectAnswer(this, 3, 1)"><span class="opt-letter">C</span> Tools AI gratis & terjangkau, plus skill AI paling dicari perusahaan</div>
+      <div class="quiz-option" onclick="selectAnswer(this, 3, 1)"><span class="opt-letter">D</span> Karena AI hanya bisa dipelajari di tahun ini</div>
+    </div>
+    <div class="quiz-feedback correct-fb" id="fb-3"><span id="fb-text-3"></span></div>
+  </div>
+</div>
+
+<!-- SLIDE 14: QUIZ Q4 -->
+<div class="slide slide-content" data-slide="14">
+  <div class="quiz-question">
+    <div class="quiz-q-num">Pertanyaan 4 / 5</div>
+    <div class="quiz-q-text">Tools AI mana yang paling cocok untuk menulis konten panjang dan analisis dokumen mendalam?</div>
+    <div class="quiz-options" id="q4-options">
+      <div class="quiz-option" data-correct="true" onclick="selectAnswer(this, 4, 1)"><span class="opt-letter">A</span> Claude</div>
+      <div class="quiz-option" onclick="selectAnswer(this, 4, 1)"><span class="opt-letter">B</span> Perplexity</div>
+      <div class="quiz-option" onclick="selectAnswer(this, 4, 1)"><span class="opt-letter">C</span> Canva AI</div>
+      <div class="quiz-option" onclick="selectAnswer(this, 4, 1)"><span class="opt-letter">D</span> Notion AI</div>
+    </div>
+    <div class="quiz-feedback correct-fb" id="fb-4"><span id="fb-text-4"></span></div>
+  </div>
+</div>
+
+<!-- SLIDE 15: QUIZ Q5 -->
+<div class="slide slide-content" data-slide="15">
+  <div class="quiz-question">
+    <div class="quiz-q-num">Pertanyaan 5 / 5</div>
+    <div class="quiz-q-text">Tools AI apa yang bisa bikin presentasi profesional dalam hitungan detik?</div>
+    <div class="quiz-options" id="q5-options">
+      <div class="quiz-option" onclick="selectAnswer(this, 5, 1)"><span class="opt-letter">A</span> ChatGPT</div>
+      <div class="quiz-option" onclick="selectAnswer(this, 5, 1)"><span class="opt-letter">B</span> Perplexity</div>
+      <div class="quiz-option" data-correct="true" onclick="selectAnswer(this, 5, 1)"><span class="opt-letter">C</span> Gamma</div>
+      <div class="quiz-option" onclick="selectAnswer(this, 5, 1)"><span class="opt-letter">D</span> Claude</div>
+    </div>
+    <div class="quiz-feedback correct-fb" id="fb-5"><span id="fb-text-5"></span></div>
+  </div>
+</div>
+
+<!-- SLIDE 16: QUIZ RESULT -->
+<div class="slide slide-content" data-slide="16">
+  <div class="quiz-result">
+    <div class="result-emoji" id="result-emoji">🏆</div>
+    <div class="result-title" id="result-title">Hasil Quiz</div>
+    <div class="result-score" id="result-score">0/5</div>
+    <div class="result-msg" id="result-msg"></div>
+    <div class="result-detail" id="result-dots"></div>
+    <div id="result-cta"></div>
+  </div>
+</div>
+
+<!-- SLIDE 17: NEXT STEPS -->
+<div class="slide slide-cta" data-slide="17">
+  <h2>Fundasi Udah Siap. <br>Sekarang Saatnya Kuasai Prompt.</h2>
+  <p>
+    Kamu udah bisa pakai AI dengan percaya diri. Langkah selanjutnya: pelajari seni Prompt Engineering yang bisa menghasilkan cuan.
+    <br><br>
+    Di <strong>Prompting for Money</strong>, kamu bakal belajar cara mengubah prompt biasa menjadi mesin penghasilan.
+  </p>
+  <a href="/komunitech/course/prompting-for-money" class="cta-btn">🔥 Lanjut ke Prompting for Money →</a>
+  <p class="cta-sub">Prompt Engineering · Monetisasi · Project-Based</p>
+</div>
+
+</div><!-- end slide-deck -->
+
+<!-- BOTTOM BAR -->
+<div class="bottom-bar">
+  <div class="bottom-bar-info">
+    <span id="slide-counter">1 / 11</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill" style="width:9%;"></div>
+    </div>
+  </div>
+  <div class="bottom-bar-btns">
+    <button class="bar-btn" id="btnPrev" onclick="goSlide(-1)">← Sebelumnya</button>
+    <button class="bar-btn primary" id="btnNext" onclick="goSlide(1)">Selanjutnya →</button>
+  </div>
+</div>
+
+<script>
+const totalSlides = 18;
+let current = 0;
+let quizScore = 0;
+let quizAnswered = [false, false, false, false, false];
+let quizResults = [false, false, false, false, false];
+
+const correctExplanations = [
+  "Benar! AI nggak bisa \"berpikir\" atau \"ngerti\" seperti manusia. AI memproses pola dari data, bukan punya kesadaran.",
+  "Benar! AI adalah <strong>copilot</strong> — dia bantu kita bekerja lebih efisien, tapi kita tetap pilot yang ambil keputusan.",
+  "Benar! Tools AI sekarang gratis & terjangkau, dan skill AI adalah salah satu yang paling dicari perusahaan di 2026.",
+  "Benar! <strong>Claude</strong> (dari Anthropic) unggul dalam menulis konten panjang dan analisis dokumen mendalam.",
+  "Benar! <strong>Gamma</strong> bisa bikin presentasi profesional dalam hitungan detik. Tinggal ketik topik, Gamma generate slide deck lengkap."
+];
+
+const wrongExplanations = [
+  "Salah. AI bisa nulis teks, bikin konten, ringkas dokumen, dan analisis data. Tapi AI <strong>nggak bisa berpikir seperti manusia</strong> — dia cuma memproses pola.",
+  "Salah. AI bukan pengganti manusia, bukan selalu 100% benar, dan <strong>bukan cuma buat programmer</strong>. AI adalah copilot yang membantu siapa saja.",
+  "Salah. Alasan utamanya: tools AI sekarang <strong>gratis & terjangkau</strong>, dan perusahaan di mana-mana <strong>mencari orang yang bisa pakai AI</strong>.",
+  "Salah. Perplexity cocok buat riset, Canva AI buat desain, Notion AI buat dokumen. <strong>Claude</strong>-lah yang paling jago menulis konten panjang dan analisis mendalam.",
+  "Salah. ChatGPT untuk chat umum, Perplexity untuk riset, Claude untuk nulis. <strong>Gamma</strong>-lah tools yang spesialis bikin presentasi otomatis."
+];
+
+function selectAnswer(opt, qNum, _unused) {
+  if (quizAnswered[qNum - 1]) return;
+  quizAnswered[qNum - 1] = true;
+
+  const isCorrect = opt.hasAttribute('data-correct');
+  quizResults[qNum - 1] = isCorrect;
+  if (isCorrect) quizScore++;
+
+  // Mark all options
+  const container = document.getElementById('q' + qNum + '-options');
+  container.querySelectorAll('.quiz-option').forEach(o => {
+    o.classList.add('locked');
+    if (o.hasAttribute('data-correct')) o.classList.add('correct');
+    if (o === opt && !isCorrect) o.classList.add('wrong');
+  });
+
+  // Show feedback
+  const fb = document.getElementById('fb-' + qNum);
+  const fbText = document.getElementById('fb-text-' + qNum);
+  if (isCorrect) {
+    fb.className = 'quiz-feedback correct-fb show';
+    fbText.innerHTML = '✅ ' + correctExplanations[qNum - 1];
+  } else {
+    fb.className = 'quiz-feedback wrong-fb show';
+    fbText.innerHTML = '❌ ' + wrongExplanations[qNum - 1];
+  }
+}
+
+function buildResult() {
+  document.getElementById('result-score').textContent = quizScore + '/5';
+  const emoji = document.getElementById('result-emoji');
+  const title = document.getElementById('result-title');
+  const msg = document.getElementById('result-msg');
+  const dots = document.getElementById('result-dots');
+  const cta = document.getElementById('result-cta');
+
+  // Dots
+  dots.innerHTML = '';
+  for (let i = 0; i < 5; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'result-dot ' + (quizResults[i] ? 'correct-dot' : 'wrong-dot');
+    dot.textContent = quizResults[i] ? '✓' : '✗';
+    dots.appendChild(dot);
+  }
+
+  if (quizScore >= 3) {
+    emoji.textContent = '🏆';
+    title.textContent = 'Lulus! Pemahaman Mantap.';
+    msg.innerHTML = 'Kamu udah paham fundamental AI dengan baik. Saatnya naik level ke <strong>Prompting for Money</strong> — ubah prompt jadi cuan.';
+    cta.innerHTML = '<a href="/komunitech/course/prompting-for-money" style="display:inline-block;background:var(--primary);color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-family:var(--font-display);font-weight:700;font-size:16px;">🔥 Lanjut ke Prompting for Money →</a>';
+  } else {
+    emoji.textContent = '📖';
+    title.textContent = 'Hampir! Perlu Review Dikit.';
+    msg.innerHTML = 'Tenang, ini baru awal. Review lagi <strong>Modul 1 & 2</strong>, terutama bagian yang masih salah. Kamu pasti bisa!';
+    cta.innerHTML = '<button onclick="current=2;updateUI();" style="display:inline-block;background:var(--white);color:var(--heading);padding:14px 32px;border:2px solid var(--border);border-radius:8px;cursor:pointer;font-family:var(--font-display);font-weight:700;font-size:16px;">📖 Review Modul 1 Lagi</button>';
+  }
+}
+
+// Interactive Checklist Functions
+function updateChecklist1() {
+  const items = document.querySelectorAll('#checklist-1 .icl-item');
+  const checked = document.querySelectorAll('#checklist-1 .icl-item.checked').length;
+  document.getElementById('cl1-counter').innerHTML = '✅ <strong>' + checked + '</strong> / 6 langkah selesai';
+  if (checked === 6) document.getElementById('cl1-done').style.display = 'block';
+  else document.getElementById('cl1-done').style.display = 'none';
+}
+function updateChecklist2() {
+  const items = document.querySelectorAll('#checklist-2 .icl-item');
+  const checked = document.querySelectorAll('#checklist-2 .icl-item.checked').length;
+  document.getElementById('cl2-counter').innerHTML = '✅ <strong>' + checked + '</strong> / 6 tools siap';
+  if (checked === 6) document.getElementById('cl2-done').style.display = 'block';
+  else document.getElementById('cl2-done').style.display = 'none';
+}
+
+function updateUI() {
+  document.querySelectorAll('.slide').forEach((s, i) => {
+    s.classList.toggle('active', i === current);
+  });
+  // Build quiz result when reaching result slide
+  if (current === 16) buildResult();
+  document.getElementById('slide-counter').textContent = `${current + 1} / ${totalSlides}`;
+  document.getElementById('progressFill').style.width = `${((current + 1) / totalSlides) * 100}%`;
+  document.getElementById('btnPrev').disabled = current === 0;
+  document.getElementById('btnNext').disabled = current === totalSlides - 1;
+}
+
+function goSlide(delta) {
+  current = Math.max(0, Math.min(totalSlides - 1, current + delta));
+  updateUI();
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+    e.preventDefault(); goSlide(1);
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    e.preventDefault(); goSlide(-1);
+  } else if (e.key === 'Home') {
+    e.preventDefault(); current = 0; updateUI();
+  } else if (e.key === 'End') {
+    e.preventDefault(); current = totalSlides - 1; updateUI();
+  }
+});
+
+let touchStartX = 0;
+document.getElementById('slideDeck').addEventListener('touchstart', (e) => {
+  touchStartX = e.touches[0].clientX;
+});
+document.getElementById('slideDeck').addEventListener('touchend', (e) => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) goSlide(diff > 0 ? 1 : -1);
+});
+
+updateUI();
+</script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Fundamentals — Modul 1 | Komunitech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:           #FFFFFF;
+  --primary:      #1464F0;
+  --primary-dark: #0F4DC4;
+  --primary-light:#E8F1FE;
+  --heading:      #050505;
+  --body:         #434343;
+  --muted:        #585858;
+  --border:       #e0e0e0;
+  --border-light: #eeeeee;
+  --accent-blue:  #618fb3;
+  --callout-bg:   #ebf4f9;
+  --font:         'Inter', -apple-system, sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  --content-max:  900px;
+  --accent-strip: 28px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── LEFT ACCENT STRIP ──────────────────── */
+.accent-strip {
+  position: fixed; left: 0; top: 0; bottom: 0;
+  width: var(--accent-strip);
+  z-index: 10; pointer-events: none;
+}
+.accent-border {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: #363636;
+}
+.accent-gradient {
+  position: absolute; left: 2px; top: 0; bottom: 0;
+  width: 26px;
+  background: linear-gradient(180deg,
+    #99c4d7 0%,
+    #a7bac0 15%,
+    #c8c8c8 30%,
+    #aaaaaa 50%,
+    #9f9f9f 65%,
+    #7c7c7c 80%,
+    #aec6f2 100%
+  );
+}
+
+/* ─── TOP NAV ────────────────────────────── */
+.course-nav {
+  height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px 0 calc(24px + var(--accent-strip));
+  background: var(--bg);
+  border-bottom: 1px solid var(--border-light);
+  position: sticky; top: 0; z-index: 50;
+}
+.course-nav-logo {
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 13px;
+  color: var(--heading); text-decoration: none;
+}
+.course-nav-logo-img {
+  width: 24px; height: 24px;
+  background: var(--primary);
+  border-radius: 5px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-size: 11px;
+}
+.course-nav-links { display: flex; gap: 16px; font-size: 13px; }
+.course-nav-links a { color: var(--muted); text-decoration: none; }
+.course-nav-links a:hover { color: var(--heading); }
+
+/* ─── SLIDE CONTAINER ────────────────────── */
+.slide-container {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 48px 24px 80px calc(24px + var(--accent-strip));
+}
+
+/* ─── EMOJI ICON ROW ─────────────────────── */
+.emoji-row {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.emoji-row span { font-size: 22px; opacity: .8; }
+.emoji-gold {
+  display: inline-block;
+  filter: drop-shadow(0 2px 4px rgba(200,160,0,.3));
+  opacity: 1 !important;
+}
+
+/* ─── TITLE SECTION ──────────────────────── */
+.slide-title {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 4.5vw, 32px);
+  font-weight: 700;
+  color: var(--heading);
+  text-align: center;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+.slide-subtitle {
+  font-size: 15px; color: var(--body);
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 48px;
+  line-height: 1.7;
+}
+
+/* ─── SECTION CARD ───────────────────────── */
+.section-card {
+  margin-bottom: 40px;
+}
+
+.section-number-row {
+  display: flex; align-items: baseline; gap: 12px;
+  margin-bottom: 6px;
+}
+.section-number {
+  font-family: var(--font-display);
+  font-size: 28px; font-weight: 800;
+  color: var(--heading);
+  line-height: 1;
+  min-width: 36px;
+}
+.section-heading {
+  font-family: var(--font-display);
+  font-size: 18px; font-weight: 700;
+  color: var(--heading);
+  line-height: 1.3;
+}
+.section-body {
+  font-size: 14.5px; color: var(--body);
+  line-height: 1.7;
+  padding-left: 48px;
+}
+.section-body p { margin-bottom: 10px; }
+
+/* ─── CALLOUT BOX ────────────────────────── */
+.callout-box {
+  margin: 16px 0 0 48px;
+  background: var(--callout-bg);
+  border-left: 4px solid var(--accent-blue);
+  border-radius: 0 6px 6px 0;
+  padding: 14px 18px;
+}
+.callout-box p {
+  font-size: 14px; color: var(--heading);
+  line-height: 1.6; margin: 0;
+}
+.callout-icon { margin-right: 6px; }
+
+/* ─── HIGHLIGHT BADGE ────────────────────── */
+.highlight-text {
+  background: linear-gradient(180deg, transparent 60%, rgba(20,100,240,.15) 60%);
+  padding: 0 2px;
+  font-weight: 600;
+  color: var(--heading);
+}
+
+/* ─── BOTTOM BAR ─────────────────────────── */
+.bottom-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--bg);
+  border-top: 1px solid var(--border-light);
+  padding: 12px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  z-index: 50;
+}
+.bottom-bar-progress {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: var(--muted);
+}
+.progress-dots {
+  display: flex; gap: 4px;
+}
+.progress-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+}
+.progress-dot.active { background: var(--primary); }
+.progress-dot.done { background: var(--accent-blue); }
+
+.bottom-bar-btn {
+  background: var(--primary);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 14px;
+  padding: 10px 28px;
+  border-radius: 6px;
+  border: none; cursor: pointer; text-decoration: none;
+  transition: background .2s;
+}
+.bottom-bar-btn:hover { background: var(--primary-dark); }
+
+/* ─── RESPONSIVE ─────────────────────────── */
+@media (max-width: 700px) {
+  .slide-container { padding-left: calc(16px + var(--accent-strip)); padding-right: 16px; }
+  .section-body { padding-left: 36px; }
+  .callout-box { margin-left: 36px; }
+  .course-nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- LEFT ACCENT STRIP -->
+<div class="accent-strip">
+  <div class="accent-border"></div>
+  <div class="accent-gradient"></div>
+</div>
+
+<!-- TOP NAV -->
+<nav class="course-nav">
+  <a href="/komunitech/course/ai-fundamentals" class="course-nav-logo">
+    <span class="course-nav-logo-img">K</span>
+    AI Fundamentals
+  </a>
+  <div class="course-nav-links">
+    <a href="/komunitech/course/ai-fundamentals">← Detail Kelas</a>
+    <a href="/komunitech/">Katalog</a>
+  </div>
+</nav>
+
+<!-- SLIDE CONTENT -->
+<div class="slide-container">
+
+  <!-- Emoji Row -->
+  <div class="emoji-row">
+    <span>🌱</span>
+    <span>🤖</span>
+    <span>💡</span>
+    <span>⚡</span>
+    <span class="emoji-gold">⭐</span>
+  </div>
+
+  <!-- Title -->
+  <h1 class="slide-title">Selamat Datang di AI Fundamentals!</h1>
+  <p class="slide-subtitle">
+    Gue excited banget akhirnya bisa share konten ini ke kalian semua. AI itu bukan cuma buat orang tech — AI itu buat <strong>siapa aja</strong> yang mau belajar. Dan kelas ini didesain khusus buat lo yang mulai dari NOL. <br><br>
+    Kelas ini dulu dijual seharga <span style="text-decoration:line-through;font-weight:600;">Rp 249.000</span> — tapi kita bikin GRATIS karena misi kita sederhana: <span class="highlight-text">semakin banyak orang Indonesia yang melek AI, semakin besar peluang kita semua.</span>
+  </p>
+
+  <!-- BEST PRACTICES HEADER -->
+  <div style="text-align:center;margin-bottom:40px;">
+    <div style="font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--heading);margin-bottom:8px;">
+      Best Practices untuk Maksimalin Kelas Ini
+    </div>
+    <p style="font-size:14px;color:var(--muted);">
+      Sebelum mulai, baca dulu 5 tips ini biar lo dapet hasil maksimal
+    </p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="section-card">
+    <div class="section-number-row">
+      <div class="section-number">1</div>
+      <div class="section-heading">Praktik, Praktik, Praktik!</div>
+    </div>
+    <div class="section-body">
+      <p>Namanya belajar AI — lo <strong>nggak akan bisa</strong> cuma dari nonton doang. Setiap modul ada <strong>"Langkah Aksi"</strong> — kerjain semuanya. Buka ChatGPT atau tools yang gue rekomendasiin, dan langsung coba.</p>
+      <p>The best way to learn is by doing. Kalau lo cuma nonton video tanpa praktik, lo cuma dapet 20% dari value kelas ini. Tapi kalau lo praktik semua Langkah Aksi? <span class="highlight-text">Lo bakal bisa pakai AI dengan percaya diri di akhir Modul 8.</span></p>
+
+      <div class="callout-box">
+        <p><span class="callout-icon">💬</span> <strong>Gabung ke grup diskusi Komunitech!</strong> Di sana lo bisa tanya jawab, sharing progress, dan networking sama learner lain. Kita percaya belajar bareng itu 10x lebih efektif.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section-card">
+    <div class="section-number-row">
+      <div class="section-number">2</div>
+      <div class="section-heading">Atur Pace Lo Sendiri</div>
+    </div>
+    <div class="section-body">
+      <p>Kelas ini <strong>self-paced</strong> — artinya lo yang tentuin ritme belajar. Mau selesaiin 8 modul dalam 3 hari? Bisa. Mau santai 1 modul per minggu? Juga bisa.</p>
+      <p>Tapi gue saranin: <span class="highlight-text">konsisten 15-30 menit per hari lebih efektif daripada marathon 3 jam sekali seminggu.</span> Otak lo butuh waktu untuk menyerap dan nyoba.</p>
+
+      <div class="callout-box">
+        <p><span class="callout-icon">📅</span> <strong>Rekomendasi jadwal:</strong> Selesaikan dalam 2 minggu — 4 modul per minggu, ~20-30 menit per hari. Dengan pace ini, lo bakal punya fundamental solid dalam 14 hari dan siap lanjut ke kelas monetisasi.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section-card">
+    <div class="section-number-row">
+      <div class="section-number">3</div>
+      <div class="section-heading">You Get Out What You Put In</div>
+    </div>
+    <div class="section-body">
+      <p>Banyak yang nanya: "Setelah selesai kelas ini, gue bisa apa?" Jawabannya: <strong>tergantung lo.</strong></p>
+      <p>Yang cuma nonton video tanpa praktik → ya cuma dapet teori. Tapi yang <span class="highlight-text">praktik semua Langkah Aksi, aktif di grup diskusi, dan eksplor sendiri</span> → mereka yang akhirnya dapet klien pertama, bikin konten viral, atau lancar pakai AI di kerjaan sehari-hari.</p>
+      <p>Kami kasih semua tools dan panduannya. <strong>Hasil akhir ada di tangan lo.</strong></p>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section-card">
+    <div class="section-number-row">
+      <div class="section-number">4</div>
+      <div class="section-heading">Be Curious!</div>
+    </div>
+    <div class="section-body">
+      <p>AI itu luas banget. Jangan takut buat <strong>eksplor di luar materi kelas.</strong> Ketemu tool AI baru? Coba. Ada ide konten yang kepikiran? Bikin aja pake AI. Temen lo nanya itu AI bisa apa? Jawab dengan demo langsung.</p>
+      <p><span class="highlight-text">Mindset yang bener: lo bukan cuma belajar AI — lo lagi upgrade diri lo sendiri.</span> Tools AI bakal terus berubah, tapi fundamental yang lo dapet di sini bakal kepake terus.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="section-card">
+    <div class="section-number-row">
+      <div class="section-number">5</div>
+      <div class="section-heading">Kalau Mentok...</div>
+    </div>
+    <div class="section-body">
+      <p>Wajar banget kalau ada yang bingung atau stuck. AI itu berkembang super cepat, tools bisa berubah UI-nya, fitur baru muncul tiap minggu. Jangan panik.</p>
+      <p><strong>Yang bisa lo lakukan:</strong></p>
+      <p>1️⃣ Cek ulang video materi — biasanya jawabannya ada di situ<br>
+      2️⃣ Tanya di grup diskusi — kemungkinan ada yang pernah ngalamin hal sama<br>
+      3️⃣ Coba ulangi Langkah Aksi dari awal — seringkali kita skip detail kecil<br>
+      4️⃣ Google/YouTube — "how to [masalah lo] with [nama tool]"</p>
+      <p>Dan inget: <span class="highlight-text">stuck itu bagian dari belajar.</span> Yang penting jangan berhenti.</p>
+    </div>
+  </div>
+
+  <!-- LET'S GO SECTION -->
+  <div style="text-align:center;margin:56px 0 40px;">
+    <div style="font-size:40px;margin-bottom:12px;">🚀</div>
+    <h2 style="font-family:var(--font-display);font-size:24px;font-weight:700;color:var(--heading);margin-bottom:8px;">
+      Udah siap?
+    </h2>
+    <p style="font-size:15px;color:var(--body);max-width:500px;margin:0 auto;">
+      Lo udah tau best practices-nya. Sekarang waktunya eksekusi. Mulai dari Modul 1 — dan jangan lupa kerjain Langkah Aksi-nya!
+    </p>
+    <a href="#" style="display:inline-block;margin-top:20px;background:var(--primary);color:var(--white);font-family:var(--font-display);font-weight:700;font-size:15px;padding:14px 40px;border-radius:6px;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='var(--primary-dark)'" onmouseout="this.style.background='var(--primary)'">Mulai Modul 1 →</a>
+  </div>
+
+</div>
+
+<!-- BOTTOM BAR -->
+<div class="bottom-bar">
+  <div class="bottom-bar-progress">
+    <span>Welcome</span>
+    <div class="progress-dots">
+      <span class="progress-dot active"></span>
+      <span class="progress-dot"></span>
+      <span class="progress-dot"></span>
+      <span class="progress-dot"></span>
+      <span class="progress-dot"></span>
+      <span class="progress-dot"></span>
+      <span class="progress-dot"></span>
+      <span class="progress-dot"></span>
+    </div>
+    <span>Modul 1 → 8</span>
+  </div>
+  <a href="#" class="bottom-bar-btn">Mulai Modul 1 →</a>
+</div>
+
+</body>
+</html>
