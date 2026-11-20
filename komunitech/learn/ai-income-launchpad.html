@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Income Launchpad — Master Deck | Komunitech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:           #FFFFFF;
+  --primary:      #1464F0;
+  --primary-dark: #0F4DC4;
+  --primary-light:#E8F1FE;
+  --dark-header:  #1c232d;
+  --heading:      #1c1d1f;
+  --body:         #4a4d52;
+  --muted:        #6a6f73;
+  --border:       #d1d7dc;
+  --border-light: #e8ebed;
+  --sidebar-bg:   #f7f8f9;
+  --white:        #FFFFFF;
+  --star:         #f3ca0b;
+  --accent:       #f97316;
+  --accent-light: #fff7ed;
+  --green:        #1A8A4A;
+  --green-light:  #F0F9F4;
+  --purple:       #7C3AED;
+  --purple-light: #F5F0FF;
+  --radius:       8px;
+  --font:         'Inter', -apple-system, sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Inter', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--white);
+  font-family: var(--font);
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--body);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* ─── TOP NAV ────────────────────────────── */
+.course-nav {
+  height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px;
+  background: var(--white);
+  border-bottom: 1px solid var(--border-light);
+  z-index: 50;
+}
+.course-nav-logo {
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 17px;
+  color: var(--heading); text-decoration: none;
+}
+.course-nav-logo-img {
+  width: 24px; height: 24px;
+  background: var(--primary);
+  border-radius: 5px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-size: 15px;
+}
+.course-nav-links { display: flex; gap: 16px; font-size: 17px; }
+.course-nav-links a { color: var(--muted); text-decoration: none; }
+.course-nav-links a:hover { color: var(--heading); }
+
+/* ─── SLIDE DECK ─────────────────────────── */
+.slide-deck {
+  height: calc(100vh - 52px - 56px);
+  overflow: hidden;
+  position: relative;
+  background: #f0f2f5;
+}
+.slide {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  padding: 48px 56px;
+  opacity: 0; transform: translateX(40px);
+  transition: opacity .4s ease, transform .4s ease;
+  pointer-events: none;
+  overflow-y: auto;
+  display: flex; flex-direction: column;
+  background: var(--white);
+}
+.slide.active {
+  opacity: 1; transform: translateX(0);
+  pointer-events: all;
+}
+
+/* ─── COVER SLIDE ────────────────────────── */
+.slide-cover {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  background: linear-gradient(160deg, #0a1628 0%, #152238 40%, #1c3a5c 100%);
+  color: var(--white);
+}
+.slide-cover .cover-badge {
+  display: inline-block;
+  background: rgba(249,115,22,.25);
+  border: 1px solid rgba(249,115,22,.4);
+  color: #ffb380;
+  padding: 6px 18px;
+  border-radius: 100px;
+  font-size: 17px; font-weight: 600;
+  letter-spacing: .5px;
+  margin-bottom: 24px;
+}
+.slide-cover .cover-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 800;
+  color: #f0f4f8;
+  line-height: 1.2;
+  margin-bottom: 14px;
+  max-width: 700px;
+}
+.slide-cover .cover-subtitle {
+  font-size: 17px;
+  color: rgba(255,255,255,.65);
+  max-width: 550px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+.slide-cover .cover-meta {
+  display: flex; gap: 24px;
+  font-size: 17px; color: rgba(255,255,255,.5);
+}
+.slide-cover .cover-meta span {
+  display: flex; align-items: center; gap: 5px;
+}
+
+/* ─── SECTION SLIDE ──────────────────────── */
+.slide-section {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  background: var(--white);
+}
+.slide-section .section-num {
+  font-family: var(--font-display);
+  font-size: 72px; font-weight: 800;
+  color: var(--primary);
+  opacity: .15;
+  line-height: 1;
+  margin-bottom: -20px;
+}
+.slide-section .section-label {
+  font-family: var(--font-display);
+  font-size: 32px; font-weight: 700;
+  color: var(--heading);
+  margin-bottom: 10px;
+}
+.slide-section .section-desc {
+  font-size: 18px; color: var(--muted);
+  max-width: 500px;
+}
+
+/* ─── CONTENT SLIDE ──────────────────────── */
+.slide-content {
+  padding: 44px 64px;
+  justify-content: flex-start;
+}
+
+.slide-content .slide-heading {
+  font-family: var(--font-display);
+  font-size: 28px; font-weight: 700;
+  color: var(--heading);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.slide-content .slide-tag {
+  display: inline-block;
+  font-size: 15px; font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+/* ─── GRID LAYOUTS ───────────────────────── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 12px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 12px; }
+.grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 14px; margin-top: 12px; }
+
+.card {
+  background: var(--sidebar-bg);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.card .card-emoji { font-size: 24px; margin-bottom: 8px; }
+.card h4 {
+  font-family: var(--font-display);
+  font-size: 17px; font-weight: 700;
+  color: var(--heading); margin-bottom: 6px;
+}
+.card p {
+  font-size: 17px; color: var(--body);
+  line-height: 1.7;
+}
+
+.card-accent { border-left: 4px solid var(--accent); }
+.card-blue { border-left: 4px solid var(--primary); }
+.card-green { border-left: 4px solid var(--green); }
+.card-purple { border-left: 4px solid var(--purple); }
+
+/* ─── CALLOUT ────────────────────────────── */
+.callout {
+  background: var(--primary-light);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-top: 16px;
+  font-size: 18px;
+  color: var(--heading);
+  display: flex; align-items: flex-start; gap: 10px;
+  line-height: 1.7;
+}
+.callout .callout-icon { font-size: 18px; flex-shrink: 0; }
+
+/* ─── TABLE STYLE ────────────────────────── */
+.table-wrap {
+  margin-top: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.table-row {
+  display: grid;
+  grid-template-columns: 2fr 2fr 3fr;
+  padding: 11px 16px;
+  font-size: 17px;
+  color: var(--body);
+  line-height: 1.6;
+  border-bottom: 1px solid var(--border-light);
+  align-items: center;
+}
+.table-row:last-child { border-bottom: none; }
+.table-row.header {
+  background: var(--sidebar-bg);
+  font-weight: 600;
+  color: var(--heading);
+  font-size: 17px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.table-row.header .col { color: var(--heading); }
+.table-row .col:first-child { font-weight: 600; color: var(--heading); }
+
+/* ─── FORMULA BOX ────────────────────────── */
+.formula-box {
+  background: #fef9f0;
+  border: 2px dashed var(--accent);
+  border-radius: var(--radius);
+  padding: 18px 24px;
+  margin-top: 14px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 16px; font-weight: 700;
+  color: var(--heading);
+}
+
+/* ─── TIMELINE ───────────────────────────── */
+.timeline-row {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  margin-top: 14px;
+}
+.timeline-dot {
+  background: var(--sidebar-bg);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  flex: 1; min-width: 100px;
+  text-align: center;
+}
+.timeline-dot .dot-num {
+  font-family: var(--font-display);
+  font-size: 24px; font-weight: 800;
+  color: var(--primary);
+  display: block;
+}
+.timeline-dot .dot-label {
+  font-size: 15px; font-weight: 600;
+  color: var(--heading);
+  margin-top: 2px;
+}
+.timeline-dot .dot-days {
+  font-size: 14px; color: var(--muted);
+}
+
+/* ─── CHECKLIST ──────────────────────────── */
+.check-list {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 10px;
+  margin-top: 14px;
+}
+.check-list li {
+  font-size: 18px; color: var(--body);
+  padding-left: 24px; position: relative;
+  line-height: 1.6;
+}
+.check-list li::before {
+  content: '✓';
+  position: absolute; left: 0; top: 0;
+  color: var(--green); font-weight: 700;
+}
+
+/* ─── TAG ────────────────────────────────── */
+.tags-row {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-top: 14px;
+}
+.tag {
+  background: var(--sidebar-bg);
+  border: 1px solid var(--border-light);
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-size: 18px; font-weight: 600;
+  color: var(--heading);
+}
+.tag-accent {
+  background: var(--accent-light);
+  border-color: rgba(249,115,22,.2);
+  color: var(--accent);
+}
+
+/* ─── BOTTOM BAR ─────────────────────────── */
+.bottom-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  height: 56px;
+  background: var(--white);
+  border-top: 1px solid var(--border-light);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px;
+  z-index: 100;
+}
+.bottom-bar-info {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 17px; color: var(--muted);
+}
+#slide-counter { font-weight: 600; color: var(--heading); }
+.progress-track {
+  width: 180px; height: 4px;
+  background: var(--border-light);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 2px;
+  transition: width .3s ease;
+}
+.bottom-bar-btns { display: flex; gap: 8px; }
+.bar-btn {
+  padding: 8px 20px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--white);
+  font-family: var(--font-display);
+  font-size: 17px; font-weight: 600;
+  color: var(--heading);
+  cursor: pointer;
+  transition: all .2s;
+}
+.bar-btn:hover { background: var(--sidebar-bg); }
+.bar-btn.primary {
+  background: var(--accent);
+  color: var(--white);
+  border-color: var(--accent);
+}
+.bar-btn.primary:hover { background: #ea580c; }
+.bar-btn:disabled {
+  opacity: .35; cursor: default; pointer-events: none;
+}
+
+/* ─── RESPONSIVE ─────────────────────────── */
+@media (max-width: 900px) {
+  .slide-content { padding: 36px 28px; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .slide-cover .cover-title { font-size: 28px; }
+  .slide-section .section-label { font-size: 28px; }
+  .slide-content .slide-heading { font-size: 24px; }
+  .table-row { grid-template-columns: 1fr 1fr 2fr; }
+  .timeline-dot { min-width: 70px; padding: 10px 8px; }
+}
+@media (max-width: 600px) {
+  .slide-content { padding: 28px 18px; }
+  .course-nav-links { display: none; }
+  .progress-track { width: 100px; }
+  .slide-cover .cover-title { font-size: 24px; }
+}
+/* ─── PRINT / PDF (untuk download slide) ─────────────── */
+@page { size: A4 landscape; margin: 12mm; }
+@media print {
+  body { overflow: visible !important; height: auto !important; background: #fff !important; font-size: 12pt; }
+  .course-nav, .bottom-bar { display: none !important; }
+  .slide-deck { height: auto !important; overflow: visible !important; background: #fff !important; position: static !important; }
+  .slide {
+    position: relative !important;
+    top: auto !important; left: auto !important; right: auto !important; bottom: auto !important;
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: 0 !important;
+    page-break-after: always;
+    padding: 16px 8px !important;
+  }
+  .slide:last-child { page-break-after: auto; }
+  .slide-cover, .slide-cta { color: #fff !important; }
+  .slide-cover .cover-subtitle, .slide-cta p, .slide-cover .cover-meta { color: rgba(255,255,255,.8) !important; }
+  .quiz-feedback { display: none !important; }
+  .quiz-option { cursor: default; }
+  .quiz-option[data-correct] .opt-letter { background: var(--green) !important; color: #fff !important; }
+  .quiz-option[data-correct]::after { content: "  ✓ Jawaban benar"; color: var(--green); font-weight: 700; font-size: 11px; }
+  .icl-item { cursor: default; }
+  .icl-counter, .icl-confetti { display: none !important; }
+  .quiz-intro, .quiz-result { height: auto !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="course-nav">
+  <a href="/komunitech/course/ai-income-launchpad" class="course-nav-logo">
+    <span class="course-nav-logo-img">K</span>
+    AI Income Launchpad · Master Deck
+  </a>
+  <div class="course-nav-links">
+    <a href="/komunitech/course/ai-income-launchpad">← Kembali ke Detail</a>
+    <a href="/komunitech/">Katalog</a>
+    <a href="ai-income-launchpad.pdf" download>⬇ Download PDF</a>
+  </div>
+</nav>
+
+<!-- ================================================ -->
+<!-- SLIDE DECK                                        -->
+<!-- ================================================ -->
+<div class="slide-deck" id="slideDeck">
+
+<!-- SLIDE 0: COVER -->
+<div class="slide slide-cover active" data-slide="0">
+  <div class="cover-badge">MASTER DECK · 8 MODUL · 30 HARI</div>
+  <h1 class="cover-title">AI Income Launchpad</h1>
+  <p class="cover-subtitle">Bangun Penghasilan Pertama dengan AI dalam 30 Hari.<br>Dari skill → penawaran → pelanggan → sistem yang bisa diulang.</p>
+  <div class="cover-meta">
+    <span>📚 8 Modul</span>
+    <span>🎯 4 Jalur</span>
+    <span>🗓️ 30 Hari</span>
+    <span>📝 Project-Based</span>
+  </div>
+</div>
+
+<!-- SLIDE 1: WELCOME & PRINSIP -->
+<div class="slide slide-content" data-slide="1">
+  <span class="slide-tag">PRINSIP UTAMA</span>
+  <h2 class="slide-heading">AI Tidak Otomatis Menghasilkan Uang</h2>
+  <p style="font-size:15px;color:var(--body);line-height:1.7;max-width:680px;">
+    Penghasilan muncul ketika AI dipakai untuk menyelesaikan <strong>masalah yang cukup penting</strong> bagi orang atau bisnis — lalu solusi itu dikemas, ditawarkan, dan dikirim dengan kualitas yang konsisten.
+  </p>
+
+  <div class="formula-box" style="margin-top:24px;">
+    💡 Satu jalur yang dijalankan sampai menghasilkan<br>lebih bernilai daripada 100 ide yang hanya disimpan.
+  </div>
+
+  <div style="margin-top:28px;">
+    <p style="font-size:16px;color:var(--muted);margin-bottom:12px;"><strong>Posisi Course:</strong></p>
+    <ul class="check-list">
+      <li>Untuk pemula dan profesional non-teknis</li>
+      <li>Tidak perlu coding, follower banyak, atau modal iklan</li>
+      <li>Target 30 hari = validasi + penghasilan pertama — bukan janji kaya instan</li>
+      <li>Visi jangka panjang dipecah menjadi milestone yang realistis</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SLIDE 2: PETA PERJALANAN 30 HARI -->
+<div class="slide slide-content" data-slide="2">
+  <span class="slide-tag">PETA PERJALANAN</span>
+  <h2 class="slide-heading">6 Fase Menuju Penghasilan AI</h2>
+
+  <div class="timeline-row" style="margin-top:20px;">
+    <div class="timeline-dot">
+      <span class="dot-num">1</span>
+      <span class="dot-label">Arah</span>
+      <span class="dot-days">H1–4</span>
+    </div>
+    <div class="timeline-dot">
+      <span class="dot-num">2</span>
+      <span class="dot-label">Penawaran</span>
+      <span class="dot-days">H5–9</span>
+    </div>
+    <div class="timeline-dot">
+      <span class="dot-num">3</span>
+      <span class="dot-label">Bukti</span>
+      <span class="dot-days">H10–14</span>
+    </div>
+    <div class="timeline-dot">
+      <span class="dot-num">4</span>
+      <span class="dot-label">Penjualan</span>
+      <span class="dot-days">H15–23</span>
+    </div>
+    <div class="timeline-dot">
+      <span class="dot-num">5</span>
+      <span class="dot-label">Delivery</span>
+      <span class="dot-days">H24–27</span>
+    </div>
+    <div class="timeline-dot">
+      <span class="dot-num">6</span>
+      <span class="dot-label">Scale</span>
+      <span class="dot-days">H28–30</span>
+    </div>
+  </div>
+
+  <div class="table-wrap" style="margin-top:24px;">
+    <div class="table-row header">
+      <div class="col">Fase</div><div class="col">Fokus</div><div class="col">Bukti yang Dihasilkan</div>
+    </div>
+    <div class="table-row"><div class="col">1. Arah</div><div class="col">Pilih jalur, niche, & masalah</div><div class="col">Income Path Score + niche statement</div></div>
+    <div class="table-row"><div class="col">2. Penawaran</div><div class="col">Buat offer & harga</div><div class="col">One-page offer + paket harga</div></div>
+    <div class="table-row"><div class="col">3. Bukti</div><div class="col">Buat sampel & portofolio</div><div class="col">3 sampel + studi kasus mini</div></div>
+    <div class="table-row"><div class="col">4. Penjualan</div><div class="col">Outreach, discovery, closing</div><div class="col">100 prospek + percakapan penjualan</div></div>
+    <div class="table-row"><div class="col">5. Delivery</div><div class="col">Kirim hasil & kumpulkan feedback</div><div class="col">SOP delivery + testimonial</div></div>
+    <div class="table-row"><div class="col">6. Scale</div><div class="col">Retainer, referral, automasi</div><div class="col">Rencana pendapatan 90 hari</div></div>
+  </div>
+
+  <div class="callout" style="margin-top:20px;">
+    <span class="callout-icon">📌</span>
+    <span><strong>Pilih hanya satu jalur</strong> untuk sprint pertama. Jangan lanjut ke scale sebelum dapat bukti pasar: respons, meeting, transaksi, atau repeat order.</span>
+  </div>
+</div>
+
+<!-- SLIDE 3: 4 JALUR PENGHASILAN -->
+<div class="slide slide-content" data-slide="3">
+  <span class="slide-tag">PILIH JALUR</span>
+  <h2 class="slide-heading">Empat Jalur Penghasilan</h2>
+
+  <div class="grid-2" style="margin-top:20px;">
+    <div class="card card-accent">
+      <div class="card-emoji">💼</div>
+      <h4>Jasa dengan AI</h4>
+      <p>Cocok untuk pemula yang ingin cepat menjual skill. Uang pertama relatif cepat.</p>
+      <div class="tags-row" style="margin-top:10px;">
+        <span class="tag">Paket konten</span><span class="tag">Riset</span><span class="tag">Presentasi</span>
+      </div>
+    </div>
+    <div class="card card-blue">
+      <div class="card-emoji">📦</div>
+      <h4>Produk Digital</h4>
+      <p>Pengetahuan/proses yang bisa dikemas. Buat sekali, jual selamanya.</p>
+      <div class="tags-row" style="margin-top:10px;">
+        <span class="tag">Template</span><span class="tag">Workbook</span><span class="tag">Mini-course</span>
+      </div>
+    </div>
+    <div class="card card-purple">
+      <div class="card-emoji">🎬</div>
+      <h4>Content-led Business</h4>
+      <p>Suka membangun audiens & konten. Lebih lambat, tapi aset jangka panjang.</p>
+      <div class="tags-row" style="margin-top:10px;">
+        <span class="tag">Affiliate</span><span class="tag">Sponsor</span><span class="tag">Membership</span>
+      </div>
+    </div>
+    <div class="card card-green">
+      <div class="card-emoji">⚙️</div>
+      <h4>Automasi & AI Agent</h4>
+      <p>Suka sistem & problem solving. Nilai proyek lebih tinggi, cocok B2B.</p>
+      <div class="tags-row" style="margin-top:10px;">
+        <span class="tag">Lead routing</span><span class="tag">FAQ assistant</span><span class="tag">Reporting</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="callout-icon">💡</span>
+    <span><strong>Rekomendasi:</strong> Untuk mayoritas pemula, mulai dari <strong>Jasa</strong>. Jasa memberi feedback pasar tercepat. Setelah paham masalah pelanggan, produk digital dan automasi lebih mudah dibuat.</span>
+  </div>
+</div>
+
+<!-- SLIDE 4: INCOME PATH SCORE -->
+<div class="slide slide-content" data-slide="4">
+  <span class="slide-tag">MODUL 2</span>
+  <h2 class="slide-heading">Income Path Score — Pilih Jalur dengan Data</h2>
+  <p style="font-size:16px;color:var(--muted);margin-bottom:10px;">Nilai setiap jalur 1–5 berdasarkan lima faktor.</p>
+
+  <div class="table-wrap">
+    <div class="table-row header">
+      <div class="col">Faktor</div><div class="col">Bobot</div><div class="col">Pertanyaan Penilaian</div>
+    </div>
+    <div class="table-row"><div class="col">Skill</div><div class="col">20%</div><div class="col">Bisakah saya menghasilkan kualitas layak jual dalam 7 hari?</div></div>
+    <div class="table-row"><div class="col">Akses pasar</div><div class="col">25%</div><div class="col">Apakah saya tahu minimal 20 calon pembeli?</div></div>
+    <div class="table-row"><div class="col">Kecepatan bukti</div><div class="col">20%</div><div class="col">Bisakah saya membuat sampel dalam 48 jam?</div></div>
+    <div class="table-row"><div class="col">Kemudahan jual</div><div class="col">15%</div><div class="col">Apakah manfaatnya mudah dijelaskan dan terlihat?</div></div>
+    <div class="table-row"><div class="col">Repeat order</div><div class="col">20%</div><div class="col">Apakah kebutuhan ini muncul berulang?</div></div>
+  </div>
+
+  <div style="margin-top:24px;">
+    <p style="font-size:16px;font-weight:600;color:var(--heading);margin-bottom:8px;">Niche Statement (format):</p>
+    <div class="formula-box" style="font-size:16px;line-height:1.6;">
+      Saya membantu <strong>[siapa]</strong> mendapatkan <strong>[hasil]</strong><br>
+      melalui <strong>[mekanisme]</strong> tanpa <strong>[hambatan utama]</strong>
+    </div>
+    <div style="margin-top:12px;font-size:15px;color:var(--muted);">
+      ✅ Baik: "Saya membantu agen properti membuat paket listing siap posting dalam 48 jam."<br>
+      ❌ Terlalu luas: "Saya membantu bisnis dengan AI."
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: RUMUS NILAI + 5C -->
+<div class="slide slide-content" data-slide="5">
+  <span class="slide-tag">MODUL 1</span>
+  <h2 class="slide-heading">Rumus Nilai & Workflow 5C</h2>
+
+  <div class="formula-box" style="margin-bottom:20px;">
+    Nilai = hasil yang diinginkan × keyakinan berhasil ÷ waktu dan usaha pelanggan
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <p style="font-size:15px;font-weight:600;color:var(--heading);margin-bottom:8px;">Jangan jual:</p>
+      <ul class="check-list">
+        <li style="color:var(--muted);">"30 caption AI"</li>
+        <li style="color:var(--muted);">"Chatbot"</li>
+        <li style="color:var(--muted);">"Riset dengan AI"</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:15px;font-weight:600;color:var(--heading);margin-bottom:8px;">Tapi jual:</p>
+      <ul class="check-list">
+        <li>"Konten sebulan siap jadwal"</li>
+        <li>"Jawaban FAQ 24/7"</li>
+        <li>"Decision brief yang bantu tim pilih lebih cepat"</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="font-size:16px;font-weight:700;color:var(--heading);margin-top:24px;margin-bottom:8px;">Workflow 5C</h3>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <span class="tag tag-accent">Context →</span>
+    <span class="tag tag-accent">Criteria →</span>
+    <span class="tag tag-accent">Create →</span>
+    <span class="tag tag-accent">Critique →</span>
+    <span class="tag tag-accent">Correct</span>
+  </div>
+  <p style="font-size:15px;color:var(--body);margin-top:10px;line-height:1.6;">
+    Berikan konteks, tujuan, batasan, contoh, dan format output. Verifikasi fakta penting, angka, dan kutipan.<br>
+    Edit hasil AI agar sesuai suara merek, konteks lokal, dan standar kualitas manusia.
+  </p>
+</div>
+
+<!-- SLIDE 6: MODUL 3 — ANATOMI OFFER -->
+<div class="slide slide-content" data-slide="6">
+  <span class="slide-tag">MODUL 3</span>
+  <h2 class="slide-heading">Bangun Penawaran yang Mudah Dibeli</h2>
+
+  <div class="grid-2" style="margin-top:16px;">
+    <div>
+      <p style="font-size:15px;font-weight:600;color:var(--heading);margin-bottom:10px;">Anatomi Offer</p>
+      <div class="table-wrap">
+        <div class="table-row header"><div class="col">Komponen</div><div class="col">Pertanyaan</div></div>
+        <div class="table-row"><div class="col">Target</div><div class="col">Siapa yang paling terbantu?</div></div>
+        <div class="table-row"><div class="col">Masalah</div><div class="col">Masalah spesifik apa?</div></div>
+        <div class="table-row"><div class="col">Outcome</div><div class="col">Perubahan apa yang diterima?</div></div>
+        <div class="table-row"><div class="col">Deliverables</div><div class="col">Apa yang benar-benar dikirim?</div></div>
+        <div class="table-row"><div class="col">Timeline</div><div class="col">Berapa lama sampai hasil?</div></div>
+        <div class="table-row"><div class="col">Risk Reversal</div><div class="col">Apa yang memberi rasa aman?</div></div>
+      </div>
+    </div>
+    <div>
+      <p style="font-size:15px;font-weight:600;color:var(--heading);margin-bottom:10px;">Tangga Harga 3-Tier</p>
+      <div class="card card-accent" style="margin-bottom:10px;">
+        <h4>🚀 Pilot</h4>
+        <p>1 minggu / 3 output / scope sempit. Menurunkan risiko & dapat bukti.</p>
+      </div>
+      <div class="card card-blue" style="margin-bottom:10px;">
+        <h4>💼 Core</h4>
+        <p>Paket bulanan atau proyek utama — solusi utama dengan hasil lengkap.</p>
+      </div>
+      <div class="card card-green">
+        <h4>📈 Growth</h4>
+        <p>Retainer + reporting + optimasi. Kecepatan, volume, dukungan lebih tinggi.</p>
+      </div>
+      <div class="callout" style="margin-top:12px;">
+        <span class="callout-icon">💰</span>
+        <span>Harga harus mengikuti <strong>nilai, kompleksitas, risiko, dan waktu</strong> — bukan sekadar berapa menit AI bekerja.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7: MODUL 4 — PORTOFOLIO -->
+<div class="slide slide-content" data-slide="7">
+  <span class="slide-tag">MODUL 4</span>
+  <h2 class="slide-heading">Portofolio Tanpa Menunggu Klien</h2>
+
+  <div class="grid-3" style="margin-top:16px;">
+    <div class="card card-accent">
+      <div class="card-emoji">🎨</div>
+      <h4>Spec Sample</h4>
+      <p>Contoh fiktif dibuat untuk bisnis nyata — tanpa mengaku sebagai klien.</p>
+    </div>
+    <div class="card card-blue">
+      <div class="card-emoji">🔄</div>
+      <h4>Before–After</h4>
+      <p>Perlihatkan kondisi awal → proses perbaikan → hasil akhir.</p>
+    </div>
+    <div class="card card-green">
+      <div class="card-emoji">📊</div>
+      <h4>Micro Case Study</h4>
+      <p>Masalah → keputusan → output → metrik yang akan dipantau. Satu halaman.</p>
+    </div>
+  </div>
+
+  <h3 style="font-size:16px;font-weight:700;color:var(--heading);margin-top:24px;margin-bottom:10px;">Quality Gate — 5 Cek Sebelum Publikasi</h3>
+  <div class="table-wrap">
+    <div class="table-row header"><div class="col">Cek</div><div class="col">Pertanyaan</div></div>
+    <div class="table-row"><div class="col">Akurat</div><div class="col">Fakta, nama, angka, klaim sudah diperiksa?</div></div>
+    <div class="table-row"><div class="col">Relevan</div><div class="col">Output menjawab kebutuhan niche, bukan generik?</div></div>
+    <div class="table-row"><div class="col">On-brand</div><div class="col">Tone, visual, dan CTA konsisten?</div></div>
+    <div class="table-row"><div class="col">Siap pakai</div><div class="col">Pelanggan bisa langsung gunakan hasilnya?</div></div>
+    <div class="table-row"><div class="col">Aman</div><div class="col">Privasi, hak cipta, batas penggunaan dijaga?</div></div>
+  </div>
+</div>
+
+<!-- SLIDE 8: MODUL 5 — CARI PELANGGAN -->
+<div class="slide slide-content" data-slide="8">
+  <span class="slide-tag">MODUL 5</span>
+  <h2 class="slide-heading">Cari Pelanggan Pertama — 100 Prospek</h2>
+
+  <div class="grid-2" style="margin-top:16px;">
+    <div>
+      <h3 style="font-size:15px;font-weight:600;color:var(--heading);margin-bottom:10px;">Skor Prioritas Prospek</h3>
+      <div class="table-wrap">
+        <div class="table-row header"><div class="col">Skor</div><div class="col">Sinyal</div></div>
+        <div class="table-row"><div class="col">+2</div><div class="col">Masalah terlihat jelas di website/konten/review</div></div>
+        <div class="table-row"><div class="col">+2</div><div class="col">Bisnis aktif menjual & punya penawaran jelas</div></div>
+        <div class="table-row"><div class="col">+1</div><div class="col">Ada hiring, launching, ekspansi, atau kampanye baru</div></div>
+        <div class="table-row"><div class="col">+1</div><div class="col">Kamu punya koneksi, referral, atau konteks relevan</div></div>
+      </div>
+    </div>
+    <div>
+      <h3 style="font-size:15px;font-weight:600;color:var(--heading);margin-bottom:10px;">Formula Outreach Anti-Spam</h3>
+      <div class="card card-accent" style="margin-bottom:12px;font-size:15px;line-height:1.7;">
+        <strong>Observasi spesifik</strong> → dampak → ide singkat → bukti → pertanyaan ringan
+      </div>
+      <div class="card card-blue" style="font-size:15px;line-height:1.7;">
+        <strong>Ritme Harian:</strong><br>
+        🎯 10 prospek baru<br>
+        ✉️ 5–10 pesan personal<br>
+        🔄 5 follow-up<br>
+        📝 1 insight/before–after<br>
+        📊 Catat reply, objection, meeting
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: MODUL 6 — DISCOVERY & CLOSING -->
+<div class="slide slide-content" data-slide="9">
+  <span class="slide-tag">MODUL 6</span>
+  <h2 class="slide-heading">Discovery & Closing</h2>
+
+  <div class="grid-2" style="margin-top:16px;">
+    <div>
+      <h3 style="font-size:15px;font-weight:700;color:var(--heading);margin-bottom:8px;">Discovery Call (6 Langkah)</h3>
+      <ol style="font-size:16px;color:var(--body);line-height:2;padding-left:18px;">
+        <li><strong>Konteks</strong> — apa yang sedang dikerjakan?</li>
+        <li><strong>Masalah</strong> — bagian mana yang lambat/mahal?</li>
+        <li><strong>Dampak</strong> — apa yang terjadi bila dibiarkan?</li>
+        <li><strong>Prioritas</strong> — seberapa penting & kapan?</li>
+        <li><strong>Keputusan</strong> — siapa terlibat? anggaran?</li>
+        <li><strong>Next Step</strong> — pilot/proposal/tidak lanjut</li>
+      </ol>
+    </div>
+    <div>
+      <h3 style="font-size:15px;font-weight:700;color:var(--heading);margin-bottom:8px;">Jawab 4 Objection Paling Umum</h3>
+      <div class="table-wrap">
+        <div class="table-row header"><div class="col">Objection</div><div class="col">Respons</div></div>
+        <div class="table-row"><div class="col">Mahal</div><div class="col">Bandingkan nilai masalah, kecilkan scope, atau mulai pilot</div></div>
+        <div class="table-row"><div class="col">"Kami bisa AI sendiri"</div><div class="col">Nilai kita: strategi, konteks, QA, eksekusi</div></div>
+        <div class="table-row"><div class="col">Belum yakin</div><div class="col">Tentukan bukti yang dibutuhkan, rancang pilot</div></div>
+        <div class="table-row"><div class="col">Nanti dulu</div><div class="col">Tanyakan pemicu/tanggal, sepakati follow-up</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:16px;">
+    <span class="callout-icon">📋</span>
+    <span><strong>Proposal Ringkas:</strong> Situasi → Outcome → Scope → Investment → Next step. Jangan panjang — klien baca 30 detik pertama.</span>
+  </div>
+</div>
+
+<!-- SLIDE 10: MODUL 7 — DELIVERY -->
+<div class="slide slide-content" data-slide="10">
+  <span class="slide-tag">MODUL 7</span>
+  <h2 class="slide-heading">Delivery dengan AI Tanpa Mengorbankan Kualitas</h2>
+
+  <div class="grid-2" style="margin-top:16px;">
+    <div>
+      <h3 style="font-size:15px;font-weight:700;color:var(--heading);margin-bottom:8px;">SOP Delivery 6 Tahap</h3>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <span class="tag" style="justify-content:flex-start;">1️⃣ <strong>Intake</strong> — brief, tujuan, audiens, akses</span>
+        <span class="tag" style="justify-content:flex-start;">2️⃣ <strong>Plan</strong> — outline, milestone, approval point</span>
+        <span class="tag" style="justify-content:flex-start;">3️⃣ <strong>Produce</strong> — draft AI + human editing</span>
+        <span class="tag" style="justify-content:flex-start;">4️⃣ <strong>QA</strong> — fact-check, brand, format, privacy</span>
+        <span class="tag" style="justify-content:flex-start;">5️⃣ <strong>Deliver</strong> — file rapi + petunjuk + ringkasan</span>
+        <span class="tag" style="justify-content:flex-start;">6️⃣ <strong>Learn</strong> — feedback, metrik, testimonial</span>
+      </div>
+    </div>
+    <div>
+      <h3 style="font-size:15px;font-weight:700;color:var(--heading);margin-bottom:8px;">Prompt Brief Universal</h3>
+      <div class="card card-blue" style="font-size:15px;line-height:1.8;">
+        <strong>Peran:</strong> [siapa AI harus bertindak]<br>
+        <strong>Konteks:</strong> [situasi]<br>
+        <strong>Tujuan:</strong> [hasil]<br>
+        <strong>Audiens:</strong> [siapa]<br>
+        <strong>Input:</strong> [data]<br>
+        <strong>Batasan:</strong> [yang tidak boleh]<br>
+        <strong>Kriteria:</strong> [standar kualitas]<br>
+        <strong>Format:</strong> [struktur output]
+      </div>
+      <div class="callout" style="margin-top:12px;">
+        <span class="callout-icon">⭐</span>
+        <span><strong>Testimonial Etis:</strong> Minta setelah milestone jelas. Izin sebelum pakai nama/logo/angka. Jangan ubah makna saat merapikan bahasa.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11: MODUL 8 — SCALE -->
+<div class="slide slide-content" data-slide="11">
+  <span class="slide-tag">MODUL 8</span>
+  <h2 class="slide-heading">Naikkan Pendapatan Secara Sehat</h2>
+
+  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:16px;margin-bottom:20px;">
+    <span class="tag tag-accent">1. Perbaiki kualitas</span>
+    <span style="color:var(--muted);margin-top:5px;">→</span>
+    <span class="tag tag-accent">2. Naikkan harga</span>
+    <span style="color:var(--muted);margin-top:5px;">→</span>
+    <span class="tag tag-accent">3. Retainer</span>
+    <span style="color:var(--muted);margin-top:5px;">→</span>
+    <span class="tag tag-accent">4. Referral</span>
+    <span style="color:var(--muted);margin-top:5px;">→</span>
+    <span class="tag tag-accent">5. Automasi</span>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <h3 style="font-size:16px;font-weight:700;color:var(--heading);margin-bottom:8px;">Matematika Pendapatan</h3>
+      <div class="formula-box" style="font-size:16px;margin-bottom:14px;">
+        Pendapatan = Pelanggan × Nilai transaksi × Frekuensi
+      </div>
+      <div style="font-size:16px;color:var(--muted);">
+        Pilih <strong>satu tuas utama</strong> per bulan agar eksperimen mudah dievaluasi.
+      </div>
+    </div>
+    <div>
+      <h3 style="font-size:16px;font-weight:700;color:var(--heading);margin-bottom:8px;">Dashboard Mingguan</h3>
+      <div style="font-size:15px;color:var(--body);line-height:1.8;">
+        📊 <strong>Prospek baru</strong> — top-of-funnel<br>
+        💬 <strong>Reply rate</strong> — relevansi target & pesan<br>
+        🤝 <strong>Meeting rate</strong> — kekuatan CTA<br>
+        💰 <strong>Close rate</strong> — offer & sales<br>
+        📈 <strong>AOV</strong> — packaging & pricing<br>
+        🔁 <strong>Repeat rate</strong> — kualitas hasil
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;font-size:15px;color:var(--muted);">
+    ⚠️ Angka proyeksi adalah ilustrasi model bisnis, bukan jaminan. Pajak, refund, biaya software, komisi, dan churn harus dihitung terpisah.
+  </div>
+</div>
+
+<!-- SLIDE 12: 4 TRACK PRAKTIK -->
+<div class="slide slide-content" data-slide="12">
+  <span class="slide-tag">TRACK PRAKTIK</span>
+  <h2 class="slide-heading">4 Track — Setiap Peserta Pilih Satu</h2>
+
+  <div class="grid-2" style="margin-top:16px;">
+    <div class="card card-accent">
+      <div class="card-emoji">💼</div>
+      <h4>Track A — Jasa dengan AI</h4>
+      <ul style="font-size:16px;color:var(--body);line-height:1.7;padding-left:16px;margin-top:6px;">
+        <li>Pilih satu service wedge: konten / riset / pitch deck / video pendek</li>
+        <li>Buat 3 sampel untuk satu niche</li>
+        <li>Mulai pilot berbayar scope kecil, deadline singkat</li>
+        <li>Target 30 hari: 1 transaksi / 3 percakapan serius</li>
+      </ul>
+    </div>
+    <div class="card card-blue">
+      <div class="card-emoji">📦</div>
+      <h4>Track B — Produk Digital</h4>
+      <ul style="font-size:16px;color:var(--body);line-height:1.7;padding-left:16px;margin-top:6px;">
+        <li>Jual masalah yang selesai, bukan jumlah halaman</li>
+        <li>Validasi dengan pre-order / 5 pembeli beta</li>
+        <li>Buat minimum sellable product dulu</li>
+        <li>Target 30 hari: 5 pembeli beta + 3 wawancara</li>
+      </ul>
+    </div>
+    <div class="card card-purple">
+      <div class="card-emoji">🎬</div>
+      <h4>Track C — Content-led</h4>
+      <ul style="font-size:16px;color:var(--body);line-height:1.7;padding-left:16px;margin-top:6px;">
+        <li>Pilih satu audiens, satu topik, satu CTA</li>
+        <li>3 pilar konten: Problem, Proof, Process</li>
+        <li>Bangun email list/komunitas — bukan cuma follower</li>
+        <li>Target 30 hari: 20 konten, 100 leads, 1 penawaran</li>
+      </ul>
+    </div>
+    <div class="card card-green">
+      <div class="card-emoji">⚙️</div>
+      <h4>Track D — Automasi & AI Agent</h4>
+      <ul style="font-size:16px;color:var(--body);line-height:1.7;padding-left:16px;margin-top:6px;">
+        <li>Mulai dari workflow sempit: input → keputusan → output</li>
+        <li>Human-in-the-loop untuk keputusan sensitif</li>
+        <li>Jual pilot dengan baseline waktu/biaya terukur</li>
+        <li>Target 30 hari: 1 demo, 1 SOP, 1 pilot conversation</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 13: CHALLENGE 30 HARI (1-15) -->
+<div class="slide slide-content" data-slide="13">
+  <span class="slide-tag">CHALLENGE</span>
+  <h2 class="slide-heading">Challenge 30 Hari — Half Marathon</h2>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px 8px;margin-top:14px;font-size:16px;">
+    <div style="padding:8px;background:var(--sidebar-bg);border-radius:4px;"><strong>H1</strong> Target pendapatan & waktu</div>
+    <div style="padding:8px;background:var(--sidebar-bg);border-radius:4px;"><strong>H2</strong> Skor 4 jalur; pilih satu</div>
+    <div style="padding:8px;background:var(--sidebar-bg);border-radius:4px;"><strong>H3</strong> Niche + niche statement</div>
+    <div style="padding:8px;background:var(--sidebar-bg);border-radius:4px;"><strong>H4</strong> 2 problem interview</div>
+    <div style="padding:8px;background:var(--sidebar-bg);border-radius:4px;"><strong>H5</strong> 3 problem interview lagi</div>
+    <div style="padding:8px;background:var(--primary-light);border-radius:4px;"><strong>H6</strong> Pilih 1 masalah bernilai</div>
+    <div style="padding:8px;background:var(--sidebar-bg);border-radius:4px;"><strong>H7</strong> Outcome & deliverables</div>
+    <div style="padding:8px;background:var(--sidebar-bg);border-radius:4px;"><strong>H8</strong> Paket Pilot/Core/Growth</div>
+    <div style="padding:8px;background:var(--sidebar-bg);border-radius:4px;"><strong>H9</strong> Scope & batas revisi</div>
+    <div style="padding:8px;background:var(--sidebar-bg);border-radius:4px;"><strong>H10</strong> Sampel pertama</div>
+    <div style="padding:8px;background:var(--sidebar-bg);border-radius:4px;"><strong>H11</strong> Sampel kedua</div>
+    <div style="padding:8px;background:var(--sidebar-bg);border-radius:4px;"><strong>H12</strong> Sampel ketiga</div>
+    <div style="padding:8px;background:var(--primary-light);border-radius:4px;"><strong>H13</strong> Studi kasus 1 halaman</div>
+    <div style="padding:8px;background:var(--sidebar-bg);border-radius:4px;"><strong>H14</strong> Minta 3 orang review offer</div>
+    <div style="padding:8px;background:var(--accent-light);border-radius:4px;"><strong>H15</strong> 25 prospek pertama</div>
+  </div>
+</div>
+
+<!-- SLIDE 14: CHALLENGE 30 HARI (16-30) -->
+<div class="slide slide-content" data-slide="14">
+  <span class="slide-tag">CHALLENGE</span>
+  <h2 class="slide-heading">Challenge 30 Hari — Finish Strong</h2>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px 8px;margin-top:14px;font-size:16px;">
+    <div style="padding:8px;background:var(--sidebar-bg);border-radius:4px;"><strong>H16</strong> 25 prospek lagi</div>
+    <div style="padding:8px;background:var(--accent-light);border-radius:4px;"><strong>H17</strong> 10 outreach personal</div>
+    <div style="padding:8px;background:var(--sidebar-bg);border-radius:4px;"><strong>H18</strong> 10 outreach + follow-up</div>
+    <div style="padding:8px;background:var(--sidebar-bg);border-radius:4px;"><strong>H19</strong> 1 before–after publik</div>
+    <div style="padding:8px;background:var(--sidebar-bg);border-radius:4px;"><strong>H20</strong> 50 prospek lagi</div>
+    <div style="padding:8px;background:var(--sidebar-bg);border-radius:4px;"><strong>H21</strong> 10 outreach</div>
+    <div style="padding:8px;background:var(--primary-light);border-radius:4px;"><strong>H22</strong> Discovery call / simulasi</div>
+    <div style="padding:8px;background:var(--primary-light);border-radius:4px;"><strong>H23</strong> Kirim proposal / pilot</div>
+    <div style="padding:8px;background:var(--sidebar-bg);border-radius:4px;"><strong>H24</strong> Intake form & SOP</div>
+    <div style="padding:8px;background:var(--sidebar-bg);border-radius:4px;"><strong>H25</strong> Checklist QA</div>
+    <div style="padding:8px;background:var(--green-light);border-radius:4px;"><strong>H26</strong> Deliver simulasi lengkap</div>
+    <div style="padding:8px;background:var(--green-light);border-radius:4px;"><strong>H27</strong> Feedback & testimonial</div>
+    <div style="padding:8px;background:var(--sidebar-bg);border-radius:4px;"><strong>H28</strong> Tawarkan retainer/referral</div>
+    <div style="padding:8px;background:var(--sidebar-bg);border-radius:4px;"><strong>H29</strong> Funnel & target 90 hari</div>
+    <div style="padding:8px;background:var(--accent-light);border-radius:4px;font-weight:700;color:var(--accent);"><strong>H30</strong> 🏆 DEMO DAY!</div>
+  </div>
+
+  <div class="callout" style="margin-top:16px;">
+    <span class="callout-icon">🏆</span>
+    <span><strong>Demo Day:</strong> Presentasikan offer, bukti, data, dan rencana 90 hari ke komunitas. Dapatkan feedback & accountability.</span>
+  </div>
+</div>
+
+<!-- SLIDE 15: TEMPLATE — OFFER + INTERVIEW + OUTREACH -->
+<div class="slide slide-content" data-slide="15">
+  <span class="slide-tag">TEMPLATE</span>
+  <h2 class="slide-heading">Template Siap Pakai</h2>
+
+  <div class="grid-2" style="margin-top:16px;">
+    <div>
+      <h3 style="font-size:16px;font-weight:700;color:var(--heading);margin-bottom:6px;">One-Page Offer</h3>
+      <div class="card card-accent" style="font-size:16px;line-height:1.8;">
+        Saya membantu <strong>______</strong><br>
+        Masalah: <strong>______</strong><br>
+        Outcome: <strong>______</strong><br>
+        Deliverables: <strong>______</strong><br>
+        Timeline: <strong>______</strong><br>
+        Kebutuhan pelanggan: <strong>______</strong><br>
+        Harga/paket: <strong>______</strong><br>
+        Scope & revisi: <strong>______</strong><br>
+        Next step: <strong>______</strong>
+      </div>
+    </div>
+    <div>
+      <h3 style="font-size:16px;font-weight:700;color:var(--heading);margin-bottom:6px;">Problem Interview</h3>
+      <ol style="font-size:16px;color:var(--body);line-height:1.8;padding-left:16px;">
+        <li>Ceritakan proses yang sekarang digunakan.</li>
+        <li>Bagian mana yang paling memakan waktu?</li>
+        <li>Seberapa sering masalah terjadi?</li>
+        <li>Apa dampaknya terhadap waktu/biaya?</li>
+        <li>Apa yang sudah pernah dicoba?</li>
+        <li>Hasil ideal jika masalah selesai?</li>
+        <li>Seberapa prioritas dalam 30–90 hari?</li>
+      </ol>
+    </div>
+  </div>
+
+  <div style="margin-top:16px;">
+    <h3 style="font-size:16px;font-weight:700;color:var(--heading);margin-bottom:6px;">Outreach Template</h3>
+    <div class="card card-blue" style="font-size:15px;line-height:1.7;">
+      Halo <strong>[Nama]</strong>, saya melihat <strong>[observasi spesifik]</strong>. Kemungkinan ini membuat <strong>[dampak]</strong>. Saya membuat contoh kecil <strong>[bukti]</strong> untuk menunjukkan alternatifnya. Kalau relevan, boleh saya kirim tiga ide yang bisa dicoba minggu ini?
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 16: TEMPLATE — FOLLOW-UP + WEEKLY REVIEW -->
+<div class="slide slide-content" data-slide="16">
+  <span class="slide-tag">TEMPLATE</span>
+  <h2 class="slide-heading">Follow-up & Weekly Review</h2>
+
+  <div class="grid-2" style="margin-top:16px;">
+    <div>
+      <h3 style="font-size:16px;font-weight:700;color:var(--heading);margin-bottom:6px;">Follow-up Template</h3>
+      <div class="card card-blue" style="font-size:15px;line-height:1.7;margin-bottom:14px;">
+        Halo <strong>[Nama]</strong>, izin follow-up pesan sebelumnya. Saya tambahkan satu ide yang lebih spesifik: <strong>[ide]</strong>. Kalau belum menjadi prioritas sekarang juga tidak apa-apa — apakah lebih tepat saya hubungi kembali pada <strong>[waktu]</strong>?
+      </div>
+
+      <h3 style="font-size:16px;font-weight:700;color:var(--heading);margin-bottom:6px;">Proposal Ringkas</h3>
+      <div class="card card-accent" style="font-size:16px;line-height:1.7;">
+        <strong>Situasi</strong> — masalah dalam bahasa pelanggan<br>
+        <strong>Outcome</strong> — hasil & indikator keberhasilan<br>
+        <strong>Scope</strong> — deliverables, timeline, input, revisi<br>
+        <strong>Investment</strong> — harga, pembayaran, masa berlaku<br>
+        <strong>Next step</strong> — cara setuju & tanggal kickoff
+      </div>
+    </div>
+    <div>
+      <h3 style="font-size:16px;font-weight:700;color:var(--heading);margin-bottom:6px;">Weekly Review</h3>
+      <div class="table-wrap">
+        <div class="table-row header"><div class="col">Pertanyaan</div><div class="col">Catatan</div></div>
+        <div class="table-row"><div class="col">Output selesai?</div><div class="col"></div></div>
+        <div class="table-row"><div class="col">Angka funnel?</div><div class="col"></div></div>
+        <div class="table-row"><div class="col">Paling banyak respons?</div><div class="col"></div></div>
+        <div class="table-row"><div class="col">Objection berulang?</div><div class="col"></div></div>
+        <div class="table-row"><div class="col">Satu perubahan?</div><div class="col"></div></div>
+        <div class="table-row"><div class="col">Yang harus dihentikan?</div><div class="col"></div></div>
+      </div>
+
+      <div class="callout" style="margin-top:14px;">
+        <span class="callout-icon">📝</span>
+        <span>Review setiap Minggu pagi. 15 menit cukup. Yang tidak diukur tidak bisa diperbaiki.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 17: SISTEM EVALUASI -->
+<div class="slide slide-content" data-slide="17">
+  <span class="slide-tag">SERTIFIKASI</span>
+  <h2 class="slide-heading">Sistem Evaluasi & Sertifikasi</h2>
+
+  <div class="table-wrap" style="margin-top:16px;">
+    <div class="table-row header">
+      <div class="col">Komponen</div><div class="col">Bobot</div><div class="col">Kriteria</div>
+    </div>
+    <div class="table-row"><div class="col">Kejelasan niche & masalah</div><div class="col">15%</div><div class="col">Spesifik, relevan, tervalidasi</div></div>
+    <div class="table-row"><div class="col">Offer & pricing</div><div class="col">20%</div><div class="col">Outcome, scope, harga, next step jelas</div></div>
+    <div class="table-row"><div class="col">Portofolio</div><div class="col">20%</div><div class="col">3 sampel berkualitas untuk niche sama</div></div>
+    <div class="table-row"><div class="col">Prospek & outreach</div><div class="col">15%</div><div class="col">Data reply rate, meeting rate, objection</div></div>
+    <div class="table-row"><div class="col">Proposal & closing</div><div class="col">15%</div><div class="col">Discovery call, proposal, objection handling</div></div>
+    <div class="table-row"><div class="col">SOP delivery</div><div class="col">10%</div><div class="col">Repeatable, bisa diikuti orang lain</div></div>
+    <div class="table-row"><div class="col">Rencana 90 hari</div><div class="col">5%</div><div class="col">Target tersambung ke aktivitas harian</div></div>
+  </div>
+
+  <div class="grid-3" style="margin-top:20px;">
+    <div class="card card-accent" style="text-align:center;">
+      <div style="font-size:28px;margin-bottom:4px;">🏆</div>
+      <h4>Gold</h4>
+      <p style="font-size:16px;">≥85% skor + bukti transaksi</p>
+    </div>
+    <div class="card card-blue" style="text-align:center;">
+      <div style="font-size:28px;margin-bottom:4px;">🥈</div>
+      <h4>Silver</h4>
+      <p style="font-size:16px;">≥70% skor + discovery call aktif</p>
+    </div>
+    <div class="card card-green" style="text-align:center;">
+      <div style="font-size:28px;margin-bottom:4px;">🥉</div>
+      <h4>Bronze</h4>
+      <p style="font-size:16px;">≥60% skor + portofolio lengkap</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 18: CLOSING -->
+<div class="slide slide-cover" data-slide="18" style="background:linear-gradient(160deg, #1c3a5c 0%, #0a1628 100%);">
+  <div class="cover-badge" style="margin-bottom:28px;">🎯 READY TO LAUNCH</div>
+  <h1 class="cover-title" style="font-size:clamp(24px,4vw,36px);">Satu Jalur. Satu Sprint. Satu Transaksi.</h1>
+  <p class="cover-subtitle">
+    AI tidak otomatis menghasilkan uang.<br>
+    Tapi dengan sistem yang tepat, AI bisa menjadi mesin penghasilan pertama kamu.
+  </p>
+  <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+    <span class="tag tag-accent" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.9);">8 Modul</span>
+    <span class="tag tag-accent" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.9);">4 Track</span>
+    <span class="tag tag-accent" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.9);">30 Hari</span>
+    <span class="tag tag-accent" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.9);">Sertifikat</span>
+  </div>
+</div>
+
+</div><!-- end slide-deck -->
+
+<!-- ================================================ -->
+<!-- BOTTOM NAVIGATION BAR                            -->
+<!-- ================================================ -->
+<div class="bottom-bar">
+  <div class="bottom-bar-info">
+    <span id="slide-counter">1 / 19</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill" style="width:5%;"></div>
+    </div>
+  </div>
+  <div class="bottom-bar-btns">
+    <button class="bar-btn" id="btnPrev" onclick="goSlide(-1)">← Sebelumnya</button>
+    <button class="bar-btn primary" id="btnNext" onclick="goSlide(1)">Selanjutnya →</button>
+  </div>
+</div>
+
+<script>
+const totalSlides = 19;
+let current = 0;
+
+function updateUI() {
+  document.querySelectorAll('.slide').forEach((s, i) => {
+    s.classList.toggle('active', i === current);
+  });
+  document.getElementById('slide-counter').textContent = `${current + 1} / ${totalSlides}`;
+  document.getElementById('progressFill').style.width = `${((current + 1) / totalSlides) * 100}%`;
+  document.getElementById('btnPrev').disabled = current === 0;
+  document.getElementById('btnNext').disabled = current === totalSlides - 1;
+}
+
+function goSlide(delta) {
+  current = Math.max(0, Math.min(totalSlides - 1, current + delta));
+  updateUI();
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+    e.preventDefault();
+    goSlide(1);
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    e.preventDefault();
+    goSlide(-1);
+  } else if (e.key === 'Home') {
+    e.preventDefault();
+    current = 0;
+    updateUI();
+  } else if (e.key === 'End') {
+    e.preventDefault();
+    current = totalSlides - 1;
+    updateUI();
+  }
+});
+
+// Touch swipe support
+let touchStartX = 0;
+document.getElementById('slideDeck').addEventListener('touchstart', (e) => {
+  touchStartX = e.touches[0].clientX;
+});
+document.getElementById('slideDeck').addEventListener('touchend', (e) => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) {
+    goSlide(diff > 0 ? 1 : -1);
+  }
+});
+
+updateUI();
+</script>
+</body>
+</html>
