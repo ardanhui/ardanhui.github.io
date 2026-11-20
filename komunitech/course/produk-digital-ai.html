@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Produk Digital dengan AI — Buat Sekali, Jual Selamanya | Komunitech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:           #FFFFFF;
+  --primary:      #1464F0;
+  --primary-dark: #0F4DC4;
+  --primary-light:#E8F1FE;
+  --dark-header:  #1c232d;
+  --heading:      #1c1d1f;
+  --body:         #4a4d52;
+  --muted:        #6a6f73;
+  --light-gray:   #9a9a9a;
+  --border:       #d1d7dc;
+  --border-light: #e8ebed;
+  --sidebar-bg:   #f7f8f9;
+  --white:        #FFFFFF;
+  --star:         #f3ca0b;
+  --radius:       4px;
+  --radius-sm:    4px;
+  --font:         'Inter', -apple-system, sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  --max-width:    1184px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── TOP NAV ────────────────────────────── */
+.top-nav {
+  height: 56px; border-bottom: 1px solid var(--border-light);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px;
+  background: var(--white);
+  position: sticky; top: 0; z-index: 100;
+}
+.top-nav-logo {
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-display);
+  font-weight: 800; font-size: 14px;
+  color: var(--heading);
+  text-decoration: none;
+}
+.top-nav-logo-img {
+  width: 28px; height: 28px;
+  background: var(--primary);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-size: 13px;
+}
+.top-nav-links { display: flex; gap: 20px; }
+.top-nav-links a {
+  font-size: 13px; color: var(--muted); text-decoration: none;
+  transition: color .2s;
+}
+.top-nav-links a:hover { color: var(--heading); }
+
+/* ─── HERO HEADER ────────────────────────── */
+.course-header {
+  background: var(--dark-header);
+  color: var(--white);
+  padding: 32px 24px 48px;
+  position: relative;
+}
+.course-header-inner {
+  max-width: var(--max-width); margin: 0 auto;
+  padding-top: 8px;
+}
+
+/* Breadcrumb */
+.header-breadcrumb {
+  font-size: 13px;
+  color: rgba(255,255,255,.7);
+  margin-bottom: 16px;
+}
+.header-breadcrumb a {
+  color: var(--primary-light); text-decoration: none;
+}
+.header-breadcrumb a:hover { text-decoration: underline; }
+
+/* Title */
+.header-title {
+  font-family: var(--font-display);
+  font-size: 30px; font-weight: 700;
+  color: #fafeff;
+  line-height: 1.2; margin-bottom: 10px;
+}
+
+/* Badge row */
+.header-badges {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  margin-top: 12px;
+}
+.header-badge {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 100px;
+  padding: 5px 14px;
+  font-size: 12px; font-weight: 500;
+  color: rgba(255,255,255,.8);
+}
+
+/* Rating & stats */
+.header-stats {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 14px; flex-wrap: wrap;
+}
+.header-rating { color: var(--star); font-size: 14px; font-weight: 600; }
+.header-rating-score { color: rgba(255,255,255,.9); font-weight: 600; font-size: 14px; }
+.header-rating-count { color: rgba(255,255,255,.7); font-size: 13px; }
+.header-students { color: rgba(255,255,255,.7); font-size: 13px; }
+
+.header-meta {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-top: 8px;
+  font-size: 13px; color: rgba(255,255,255,.65);
+}
+.header-meta span { display: flex; align-items: center; gap: 4px; }
+
+/* Created by */
+.header-author {
+  margin-top: 14px; font-size: 13px;
+  color: rgba(255,255,255,.7);
+}
+.header-author strong { color: rgba(255,255,255,.9); }
+
+/* ─── MAIN LAYOUT ────────────────────────── */
+.course-main {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 48px;
+  padding: 32px 24px 80px;
+}
+
+/* ─── CONTENT COLUMN ─────────────────────── */
+.content-col {}
+
+/* Section Card */
+.content-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.content-card h2 {
+  font-family: var(--font-display);
+  font-size: 20px; font-weight: 700;
+  color: var(--heading); margin-bottom: 16px;
+}
+.content-card h3 {
+  font-size: 14px; font-weight: 600;
+  color: var(--heading); margin-bottom: 6px;
+}
+.content-card p {
+  font-size: 14px; color: var(--body);
+  line-height: 1.7; margin-bottom: 12px;
+}
+.content-card ul {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.content-card li {
+  font-size: 14px; color: var(--body);
+  padding-left: 20px; position: relative;
+  line-height: 1.5;
+}
+.content-card li::before {
+  content: '✓';
+  position: absolute; left: 0; top: 0;
+  color: var(--primary); font-weight: 700;
+}
+
+/* Section divider */
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 24px 0;
+}
+
+/* Skills badges */
+.skills-row {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.skill-badge {
+  background: #f0f4f8;
+  border: 1px solid var(--border-light);
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-size: 12px; font-weight: 600;
+  color: var(--heading);
+}
+
+/* Curriculum accordion */
+.curriculum-module {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+.curriculum-module-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px;
+  background: #f7f8f9;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600; font-size: 14px;
+  color: var(--heading);
+}
+.curriculum-module-header:hover { background: #f0f1f3; }
+.curriculum-module-meta {
+  font-size: 12px; color: var(--muted);
+  font-weight: 400;
+}
+.curriculum-module-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height .3s ease;
+}
+.curriculum-module.open .curriculum-module-body { max-height: 500px; }
+.curriculum-lesson {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--border-light);
+  font-size: 13px; color: var(--body);
+}
+.curriculum-lesson-icon { width: 20px; flex-shrink: 0; text-align: center; }
+.curriculum-lesson-title { flex: 1; }
+.curriculum-lesson-meta { font-size: 12px; color: var(--muted); flex-shrink: 0; }
+
+/* Instructor card */
+.instructor-card {
+  display: flex; gap: 16px; align-items: flex-start;
+}
+.instructor-avatar {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), #0DC3EB);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800; font-size: 24px;
+  color: var(--white); flex-shrink: 0;
+}
+.instructor-info h3 { margin-bottom: 2px; }
+.instructor-title { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+.instructor-stats { display: flex; gap: 16px; font-size: 13px; color: var(--muted); }
+.instructor-bio { font-size: 13px; color: var(--body); line-height: 1.7; margin-top: 8px; }
+
+/* ─── SIDEBAR ────────────────────────────── */
+.sidebar {
+  position: sticky; top: 72px;
+  align-self: start;
+}
+.sidebar-card {
+  background: var(--sidebar-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.sidebar-preview {
+  position: relative;
+  aspect-ratio: 16/9;
+  background: #000;
+}
+.sidebar-preview video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+/* ─── VIDEO SECTION ──────────────────────── */
+.video-section {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #000;
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.video-section video {
+  width: 100%; height: 100%;
+}
+
+.sidebar-body { padding: 20px; }
+.sidebar-price {
+  font-family: var(--font-display);
+  font-size: 28px; font-weight: 800;
+  color: var(--heading);
+  margin-bottom: 2px;
+}
+.sidebar-price-digit { font-size: 16px; color: var(--muted); font-weight: 400; }
+
+.sidebar-btn {
+  display: block; width: 100%;
+  padding: 13px;
+  border: none; border-radius: var(--radius);
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 15px;
+  cursor: pointer; text-decoration: none;
+  text-align: center;
+  transition: all .2s;
+  margin-bottom: 8px;
+}
+.sidebar-btn.primary {
+  background: var(--primary);
+  color: var(--white);
+}
+.sidebar-btn.primary:hover { background: var(--primary-dark); }
+.sidebar-btn.outline {
+  background: transparent;
+  color: var(--heading);
+  border: 1.5px solid var(--heading);
+}
+.sidebar-btn.outline:hover { background: rgba(0,0,0,.03); }
+
+.sidebar-guarantee {
+  text-align: center;
+  font-size: 12px; color: var(--muted);
+  margin: 12px 0 16px;
+}
+
+.sidebar-includes-title {
+  font-weight: 700; font-size: 14px;
+  color: var(--heading);
+  margin-bottom: 12px;
+}
+.sidebar-includes-list {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.sidebar-includes-list li {
+  font-size: 13px; color: var(--body);
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* ─── CTA BANNER ─────────────────────────── */
+.cta-banner {
+  background: var(--primary);
+  padding: 20px 24px;
+  text-align: center;
+  display: flex; align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.cta-banner-text { color: var(--white); font-weight: 600; font-size: 15px; }
+.cta-banner-btn {
+  background: var(--white);
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 14px;
+  padding: 10px 28px;
+  border-radius: var(--radius);
+  border: none; cursor: pointer; text-decoration: none;
+  transition: transform .2s;
+}
+.cta-banner-btn:hover { transform: scale(1.02); }
+
+/* ─── FOOTER ─────────────────────────────── */
+.mini-footer {
+  border-top: 1px solid var(--border-light);
+  padding: 24px;
+  text-align: center;
+  font-size: 12px; color: var(--light-gray);
+}
+
+/* ─── RESPONSIVE ─────────────────────────── */
+@media (max-width: 900px) {
+  .course-main { grid-template-columns: 1fr; gap: 24px; }
+  .sidebar { position: static; }
+  .header-title { font-size: 24px; }
+  .top-nav-links { display: none; }
+}
+@media (max-width: 600px) {
+  .course-main { padding: 24px 16px 48px; }
+  .course-header { padding: 24px 16px 32px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="/komunitech/" class="top-nav-logo">
+    <span class="top-nav-logo-img">K</span>
+    Komunitech
+  </a>
+  <div class="top-nav-links">
+    <a href="/komunitech/">← Kembali ke Katalog</a>
+  </div>
+</nav>
+
+<header class="course-header">
+  <div class="course-header-inner">
+    <div class="header-breadcrumb">
+      <a href="/komunitech/">Kursus</a> › <a href="/komunitech/#courses">Starter</a> › Produk Digital dengan AI
+    </div>
+    <h1 class="header-title">Produk Digital dengan AI — Buat Sekali, Jual Selamanya</h1>
+
+    <div class="header-badges">
+      <span class="header-badge">📦 Starter</span>
+      <span class="header-badge">🇮🇩 Bahasa Indonesia</span>
+      <span class="header-badge">🔄 Akses Seumur Hidup</span>
+    </div>
+
+    <div class="header-meta">
+      <span>📚 10 Modul</span>
+      <span>·</span>
+      
+      <span>📝 Step-by-Step</span>
+    </div>
+
+    <div class="header-author">
+      Dibuat oleh <strong>Tim Komunitech</strong> — Komunitas AI Indonesia
+    </div>
+  </div>
+</header>
+
+<div class="course-main">
+  <div class="content-col">
+
+    <div class="content-card">
+      <h2>Apa yang akan kamu pelajari</h2>
+      <div class="skills-row" style="margin-bottom:16px;">
+        <span class="skill-badge">Produk Digital</span>
+        <span class="skill-badge">Ebook AI</span>
+        <span class="skill-badge">Template</span>
+        <span class="skill-badge">Launch</span>
+        <span class="skill-badge">Marketplace</span>
+      </div>
+      <ul>
+        <li>Riset produk digital yang laku di pasar</li>
+        <li>Bikin ebook, template, dan mini course dengan AI</li>
+        <li>Susun prompt pack yang bernilai jual tinggi</li>
+        <li>Listing & launch produk di Gumroad, Tokopedia, Trakteer</li>
+        <li>Bangun sistem jualan produk digital yang jalan otomatis</li>
+      </ul>
+    </div>
+
+    <div class="content-card">
+      <h2>Deskripsi</h2>
+      <p>Buat produk digital yang bisa kamu jual <strong>berulang kali tanpa stok</strong>. Dari riset pasar, bikin ebook/template/mini course pakai AI, sampai launch dan listing di Gumroad, Tokopedia, dan Trakteer. Buat sekali, jual selamanya.</p>
+    </div>
+
+    <div class="content-card">
+      <h2>Kurikulum</h2>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">10 Modul · Akses seumur hidup</p>
+      <div class="curriculum-module open" onclick="this.classList.toggle('open')">
+        <div class="curriculum-module-header">
+          Modul 1: Riset Pasar Produk Digital
+          <span class="curriculum-module-meta">3 pelajaran</span>
+        </div>
+        <div class="curriculum-module-body">
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Identifikasi masalah pasar</span></div>
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Analisis kompetitor</span></div>
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">✏️</span><span class="curriculum-lesson-title">Validasi ide</span></div>
+        </div>
+      </div>
+      <div class="curriculum-module" onclick="this.classList.toggle('open')">
+        <div class="curriculum-module-header">
+          Modul 2: Validasi Ide Produk
+          <span class="curriculum-module-meta">3 pelajaran</span>
+        </div>
+        <div class="curriculum-module-body">
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Pre-sale & survey</span></div>
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Landing page uji</span></div>
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">✏️</span><span class="curriculum-lesson-title">Feedback awal</span></div>
+        </div>
+      </div>
+      <div class="curriculum-module" onclick="this.classList.toggle('open')">
+        <div class="curriculum-module-header">
+          Modul 3: Bikin Ebook dengan AI
+          <span class="curriculum-module-meta">3 pelajaran</span>
+        </div>
+        <div class="curriculum-module-body">
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Outline ebook</span></div>
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Draft bab dengan AI</span></div>
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">✏️</span><span class="curriculum-lesson-title">Editing & desain</span></div>
+        </div>
+      </div>
+      <div class="curriculum-module" onclick="this.classList.toggle('open')">
+        <div class="curriculum-module-header">
+          Modul 4: Template & Checklist
+          <span class="curriculum-module-meta">3 pelajaran</span>
+        </div>
+        <div class="curriculum-module-body">
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Jenis template laku</span></div>
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Bikin template AI</span></div>
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">✏️</span><span class="curriculum-lesson-title">Packaging</span></div>
+        </div>
+      </div>
+      <div class="curriculum-module" onclick="this.classList.toggle('open')">
+        <div class="curriculum-module-header">
+          Modul 5: Mini Course
+          <span class="curriculum-module-meta">3 pelajaran</span>
+        </div>
+        <div class="curriculum-module-body">
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Struktur mini course</span></div>
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Rekam materi</span></div>
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">✏️</span><span class="curriculum-lesson-title">Platform hosting</span></div>
+        </div>
+      </div>
+      <div class="curriculum-module" onclick="this.classList.toggle('open')">
+        <div class="curriculum-module-header">
+          Modul 6: Prompt Pack
+          <span class="curriculum-module-meta">3 pelajaran</span>
+        </div>
+        <div class="curriculum-module-body">
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Koleksi prompt</span></div>
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Kategorisasi</span></div>
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">✏️</span><span class="curriculum-lesson-title">Selling point</span></div>
+        </div>
+      </div>
+      <div class="curriculum-module" onclick="this.classList.toggle('open')">
+        <div class="curriculum-module-header">
+          Modul 7: Landing Page & Listing
+          <span class="curriculum-module-meta">3 pelajaran</span>
+        </div>
+        <div class="curriculum-module-body">
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Copywriting landing</span></div>
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Listing Gumroad</span></div>
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">✏️</span><span class="curriculum-lesson-title">Tokopedia & Trakteer</span></div>
+        </div>
+      </div>
+      <div class="curriculum-module" onclick="this.classList.toggle('open')">
+        <div class="curriculum-module-header">
+          Modul 8: Launch Produk
+          <span class="curriculum-module-meta">3 pelajaran</span>
+        </div>
+        <div class="curriculum-module-body">
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Strategi launch</span></div>
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Build-up audiens</span></div>
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">✏️</span><span class="curriculum-lesson-title">Hari-H launch</span></div>
+        </div>
+      </div>
+      <div class="curriculum-module" onclick="this.classList.toggle('open')">
+        <div class="curriculum-module-header">
+          Modul 9: Marketing & Jualan
+          <span class="curriculum-module-meta">3 pelajaran</span>
+        </div>
+        <div class="curriculum-module-body">
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Konten promosi</span></div>
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Email marketing</span></div>
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">✏️</span><span class="curriculum-lesson-title">Kolaborasi</span></div>
+        </div>
+      </div>
+      <div class="curriculum-module" onclick="this.classList.toggle('open')">
+        <div class="curriculum-module-header">
+          Modul 10: Otomasi & Scale
+          <span class="curriculum-module-meta">3 pelajaran</span>
+        </div>
+        <div class="curriculum-module-body">
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Automasi delivery</span></div>
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Upsell & bundle</span></div>
+<div class="curriculum-lesson"><span class="curriculum-lesson-icon">✏️</span><span class="curriculum-lesson-title">Scale katalog</span></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-body">
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:2px;">
+          <span class="sidebar-price">Rp 125K</span>
+          <span style="text-decoration:line-through;color:var(--muted);font-size:16px;">Rp 299K</span>
+        </div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:16px;">Diskon launch — harga naik setelah kuota terisi</div>
+
+        <a href="/komunitech/#" class="sidebar-btn primary">🚀 Daftar Sekarang</a>
+
+        <a href="/komunitech/learn/produk-digital-ai" class="sidebar-btn outline" style="margin-top:8px;">🎬 Lihat Slide</a>
+
+
+        <div class="sidebar-includes-title">Kelas ini termasuk:</div>
+        <ul class="sidebar-includes-list">
+          <li>📚 10 Modul lengkap</li>
+          <li>📝 Latihan & langkah aksi</li>
+          <li>📜 Sertifikat digital</li>
+          <li>🔄 Update konten gratis</li>
+          <li>💬 Akses komunitas</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align:center;font-size:12px;color:var(--muted);margin-top:12px;">
+      💡 Lihat kelas gratis kami dulu<br>
+      <a href="/komunitech/course/ai-fundamentals" style="color:var(--primary);">🌱 AI Fundamentals (Gratis) →</a>
+    </div>
+  </aside>
+</div>
+
+<footer class="mini-footer">
+  © 2025 Komunitech — Komunitas AI Indonesia. <a href="/komunitech/" style="color:var(--primary);">Kembali ke katalog</a>
+</footer>
+
+</body>
+</html>

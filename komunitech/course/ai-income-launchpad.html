@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Income Launchpad — Bangun Penghasilan Pertama dengan AI | Komunitech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:           #FFFFFF;
+  --primary:      #1464F0;
+  --primary-dark: #0F4DC4;
+  --primary-light:#E8F1FE;
+  --dark-header:  #1c232d;
+  --heading:      #1c1d1f;
+  --body:         #4a4d52;
+  --muted:        #6a6f73;
+  --light-gray:   #9a9a9a;
+  --border:       #d1d7dc;
+  --border-light: #e8ebed;
+  --sidebar-bg:   #f7f8f9;
+  --white:        #FFFFFF;
+  --star:         #f3ca0b;
+  --accent:       #f97316;
+  --accent-light: #fff7ed;
+  --radius:       4px;
+  --radius-sm:    4px;
+  --font:         'Inter', -apple-system, sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  --max-width:    1184px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.top-nav {
+  height: 56px; border-bottom: 1px solid var(--border-light);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px;
+  background: var(--white);
+  position: sticky; top: 0; z-index: 100;
+}
+.top-nav-logo {
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-display);
+  font-weight: 800; font-size: 14px;
+  color: var(--heading);
+  text-decoration: none;
+}
+.top-nav-logo-img {
+  width: 28px; height: 28px;
+  background: var(--primary);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-size: 13px;
+}
+.top-nav-links { display: flex; gap: 20px; }
+.top-nav-links a {
+  font-size: 13px; color: var(--muted); text-decoration: none;
+  transition: color .2s;
+}
+.top-nav-links a:hover { color: var(--heading); }
+
+.course-header {
+  background: var(--dark-header);
+  color: var(--white);
+  padding: 32px 24px 48px;
+  position: relative;
+}
+.course-header-inner {
+  max-width: var(--max-width); margin: 0 auto;
+  padding-top: 8px;
+}
+.header-breadcrumb {
+  font-size: 13px;
+  color: rgba(255,255,255,.7);
+  margin-bottom: 16px;
+}
+.header-breadcrumb a {
+  color: var(--primary-light); text-decoration: none;
+}
+.header-breadcrumb a:hover { text-decoration: underline; }
+.header-title {
+  font-family: var(--font-display);
+  font-size: 30px; font-weight: 700;
+  color: #fafeff;
+  line-height: 1.2; margin-bottom: 10px;
+}
+.header-subtitle {
+  font-size: 16px; color: rgba(255,255,255,.7);
+  margin-bottom: 4px;
+  font-style: italic;
+}
+.header-badges {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  margin-top: 12px;
+}
+.header-badge {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 100px;
+  padding: 5px 14px;
+  font-size: 12px; font-weight: 500;
+  color: rgba(255,255,255,.8);
+}
+.header-badge.accent {
+  background: rgba(249,115,22,.3);
+  border-color: rgba(249,115,22,.4);
+  color: #fdd;
+}
+.header-stats {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 14px; flex-wrap: wrap;
+}
+.header-rating { color: var(--star); font-size: 14px; font-weight: 600; }
+.header-rating-score { color: rgba(255,255,255,.9); font-weight: 600; font-size: 14px; }
+.header-rating-count { color: rgba(255,255,255,.7); font-size: 13px; }
+.header-students { color: rgba(255,255,255,.7); font-size: 13px; }
+.header-meta {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-top: 8px;
+  font-size: 13px; color: rgba(255,255,255,.65);
+}
+.header-meta span { display: flex; align-items: center; gap: 4px; }
+.header-author {
+  margin-top: 14px; font-size: 13px;
+  color: rgba(255,255,255,.7);
+}
+.header-author strong { color: rgba(255,255,255,.9); }
+
+.course-main {
+  max-width: var(--max-width); margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 48px;
+  padding: 32px 24px 80px;
+}
+.content-col {}
+.content-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.content-card h2 {
+  font-family: var(--font-display);
+  font-size: 20px; font-weight: 700;
+  color: var(--heading); margin-bottom: 16px;
+}
+.content-card h3 {
+  font-size: 14px; font-weight: 600;
+  color: var(--heading); margin-bottom: 6px;
+}
+.content-card p {
+  font-size: 14px; color: var(--body);
+  line-height: 1.7; margin-bottom: 12px;
+}
+.content-card ul {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.content-card li {
+  font-size: 14px; color: var(--body);
+  padding-left: 20px; position: relative;
+  line-height: 1.5;
+}
+.content-card li::before {
+  content: '✓';
+  position: absolute; left: 0; top: 0;
+  color: var(--primary); font-weight: 700;
+}
+
+.skills-row {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.skill-badge {
+  background: #f0f4f8;
+  border: 1px solid var(--border-light);
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-size: 12px; font-weight: 600;
+  color: var(--heading);
+}
+
+/* Curriculum */
+.curriculum-module {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+.curriculum-module-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px;
+  background: #f7f8f9;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600; font-size: 14px;
+  color: var(--heading);
+}
+.curriculum-module-header:hover { background: #f0f1f3; }
+.curriculum-module-meta {
+  font-size: 12px; color: var(--muted);
+  font-weight: 400;
+}
+.curriculum-module-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height .3s ease;
+}
+.curriculum-module.open .curriculum-module-body { max-height: 800px; }
+.curriculum-lesson {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--border-light);
+  font-size: 13px; color: var(--body);
+}
+.curriculum-lesson-icon { width: 20px; flex-shrink: 0; text-align: center; }
+.curriculum-lesson-title { flex: 1; }
+.curriculum-lesson-meta { font-size: 12px; color: var(--muted); flex-shrink: 0; }
+
+/* Phase timeline */
+.phase-timeline {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.phase-block {
+  background: var(--sidebar-bg);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 14px;
+  text-align: center;
+}
+.phase-block .phase-num {
+  font-family: var(--font-display);
+  font-size: 24px; font-weight: 800;
+  color: var(--primary);
+  display: block;
+}
+.phase-block .phase-label {
+  font-size: 12px; font-weight: 600;
+  color: var(--heading);
+  margin-top: 4px;
+}
+.phase-block .phase-days {
+  font-size: 11px; color: var(--muted);
+}
+
+/* Track cards */
+.track-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.track-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  background: var(--white);
+}
+.track-card .track-icon {
+  font-size: 24px; margin-bottom: 8px;
+}
+.track-card h4 {
+  font-size: 14px; font-weight: 700;
+  color: var(--heading); margin-bottom: 4px;
+}
+.track-card p {
+  font-size: 12px; color: var(--muted);
+  line-height: 1.5; margin-bottom: 0;
+}
+
+/* Instructor */
+.instructor-card {
+  display: flex; gap: 16px; align-items: flex-start;
+}
+.instructor-avatar {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800; font-size: 24px;
+  color: var(--white); flex-shrink: 0;
+}
+.instructor-info h3 { margin-bottom: 2px; }
+.instructor-title { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+.instructor-stats { display: flex; gap: 16px; font-size: 13px; color: var(--muted); }
+.instructor-bio { font-size: 13px; color: var(--body); line-height: 1.7; margin-top: 8px; }
+
+/* Sidebar */
+.sidebar {
+  position: sticky; top: 72px;
+  align-self: start;
+}
+.sidebar-card {
+  background: var(--sidebar-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.sidebar-preview {
+  position: relative;
+  aspect-ratio: 16/9;
+  background: #000;
+}
+.sidebar-preview video {
+  width: 100%; height: 100%;
+  object-fit: cover; cursor: pointer;
+}
+.sidebar-body { padding: 20px; }
+.sidebar-price {
+  font-family: var(--font-display);
+  font-size: 28px; font-weight: 800;
+  color: var(--heading);
+  margin-bottom: 2px;
+}
+.sidebar-price-digit { font-size: 16px; color: var(--muted); font-weight: 400; }
+.sidebar-btn {
+  display: block; width: 100%;
+  padding: 13px;
+  border: none; border-radius: var(--radius);
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 15px;
+  cursor: pointer; text-decoration: none;
+  text-align: center;
+  transition: all .2s;
+  margin-bottom: 8px;
+}
+.sidebar-btn.primary {
+  background: var(--accent);
+  color: var(--white);
+}
+.sidebar-btn.primary:hover { background: #ea580c; }
+.sidebar-btn.outline {
+  background: transparent;
+  color: var(--heading);
+  border: 1.5px solid var(--heading);
+}
+.sidebar-btn.outline:hover { background: rgba(0,0,0,.03); }
+.sidebar-guarantee {
+  text-align: center;
+  font-size: 12px; color: var(--muted);
+  margin: 12px 0 16px;
+}
+.sidebar-includes-title {
+  font-weight: 700; font-size: 14px;
+  color: var(--heading);
+  margin-bottom: 12px;
+}
+.sidebar-includes-list {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.sidebar-includes-list li {
+  font-size: 13px; color: var(--body);
+  display: flex; align-items: center; gap: 8px;
+}
+
+.cta-banner {
+  background: var(--accent);
+  padding: 20px 24px;
+  text-align: center;
+  display: flex; align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.cta-banner-text { color: var(--white); font-weight: 600; font-size: 15px; }
+.cta-banner-btn {
+  background: var(--white);
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 14px;
+  padding: 10px 28px;
+  border-radius: var(--radius);
+  border: none; cursor: pointer; text-decoration: none;
+  transition: transform .2s;
+}
+.cta-banner-btn:hover { transform: scale(1.02); }
+
+.mini-footer {
+  border-top: 1px solid var(--border-light);
+  padding: 24px;
+  text-align: center;
+  font-size: 12px; color: var(--light-gray);
+}
+
+/* Target Audience Cards */
+.target-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.target-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px;
+  background: var(--sidebar-bg);
+  border-radius: var(--radius);
+  font-size: 13px; color: var(--body);
+  line-height: 1.5;
+}
+.target-item .target-emoji { font-size: 20px; flex-shrink: 0; }
+
+@media (max-width: 900px) {
+  .course-main { grid-template-columns: 1fr; gap: 24px; }
+  .sidebar { position: static; }
+  .header-title { font-size: 24px; }
+  .top-nav-links { display: none; }
+  .phase-timeline { grid-template-columns: repeat(2, 1fr); }
+  .track-grid { grid-template-columns: 1fr; }
+  .target-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .course-main { padding: 24px 16px 48px; }
+  .course-header { padding: 24px 16px 32px; }
+  .phase-timeline { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="/komunitech/" class="top-nav-logo">
+    <span class="top-nav-logo-img">K</span>
+    Komunitech
+  </a>
+  <div class="top-nav-links">
+    <a href="/komunitech/">← Kembali ke Katalog</a>
+  </div>
+</nav>
+
+<header class="course-header">
+  <div class="course-header-inner">
+    <div class="header-breadcrumb">
+      <a href="/komunitech/">Kursus</a> › <a href="/komunitech/#courses">Master</a> › AI Income Launchpad
+    </div>
+    <h1 class="header-title">AI Income Launchpad — Bangun Penghasilan Pertama dengan AI</h1>
+    <p class="header-subtitle">Dari skill → penawaran → pelanggan → sistem yang bisa diulang</p>
+
+    <div class="header-badges">
+      <span class="header-badge accent">🔥 Project-Based</span>
+      <span class="header-badge">🎓 Sertifikat</span>
+      <span class="header-badge">🇮🇩 Bahasa Indonesia</span>
+      <span class="header-badge">🚀 30 Hari</span>
+    </div>
+
+    
+
+    <div class="header-meta">
+      <span>📚 8 Modul</span>
+      <span>·</span>
+      
+      <span>📝 20+ Tugas Praktik</span>
+      <span>·</span>
+      <span>🔄 Akses Seumur Hidup</span>
+    </div>
+
+    <div class="header-author">
+      Dibuat oleh <strong>Tim Komunitech</strong> — Komunitas AI Indonesia
+    </div>
+  </div>
+</header>
+
+<div class="course-main">
+  <div class="content-col">
+
+    <!-- Apa yang Akan Dipelajari -->
+    <div class="content-card">
+      <h2>Apa yang akan kamu pelajari</h2>
+      <div class="skills-row" style="margin-bottom:16px;">
+        <span class="skill-badge">🧠 Mindset AI-to-Income</span>
+        <span class="skill-badge">🎯 Niche Selection</span>
+        <span class="skill-badge">🏗️ Offer Building</span>
+        <span class="skill-badge">📁 Portfolio Creation</span>
+        <span class="skill-badge">🔍 Prospecting</span>
+        <span class="skill-badge">🤝 Sales & Closing</span>
+        <span class="skill-badge">⚡ AI Delivery</span>
+        <span class="skill-badge">📈 Business Scaling</span>
+      </div>
+      <ul>
+        <li>Bangun sistem penghasilan berbasis AI yang bisa diulang — dari nol</li>
+        <li>Temukan jalur penghasilan yang paling cocok buat kamu (Jasa / Produk / Konten / Automasi)</li>
+        <li>Buat portofolio siap pitch tanpa menunggu klien pertama</li>
+        <li>Kuasai outreach, discovery call, dan closing — tanpa terdengar salesy</li>
+        <li>Bangun SOP delivery dengan AI, kumpulkan testimonial, dan scale pendapatan</li>
+      </ul>
+    </div>
+
+    <!-- Peta Perjalanan 30 Hari -->
+    <div class="content-card">
+      <h2>Peta Perjalanan 30 Hari</h2>
+      <div class="phase-timeline">
+        <div class="phase-block">
+          <span class="phase-num">1</span>
+          <span class="phase-label">Arah</span>
+          <span class="phase-days">Hari 1–4</span>
+        </div>
+        <div class="phase-block">
+          <span class="phase-num">2</span>
+          <span class="phase-label">Penawaran</span>
+          <span class="phase-days">Hari 5–9</span>
+        </div>
+        <div class="phase-block">
+          <span class="phase-num">3</span>
+          <span class="phase-label">Bukti</span>
+          <span class="phase-days">Hari 10–14</span>
+        </div>
+        <div class="phase-block">
+          <span class="phase-num">4</span>
+          <span class="phase-label">Penjualan</span>
+          <span class="phase-days">Hari 15–23</span>
+        </div>
+        <div class="phase-block">
+          <span class="phase-num">5</span>
+          <span class="phase-label">Delivery</span>
+          <span class="phase-days">Hari 24–27</span>
+        </div>
+        <div class="phase-block">
+          <span class="phase-num">6</span>
+          <span class="phase-label">Scale</span>
+          <span class="phase-days">Hari 28–30</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deskripsi -->
+    <div class="content-card">
+      <h2>Deskripsi</h2>
+      <p>AI tidak otomatis menghasilkan uang. Penghasilan muncul ketika AI dipakai untuk <strong>menyelesaikan masalah</strong> yang cukup penting bagi orang atau bisnis — lalu solusi itu dikemas, ditawarkan, dan dikirim dengan kualitas yang konsisten.</p>
+      <p><strong>AI Income Launchpad</strong> adalah master course project-based yang nggak cuma ngajarin tools AI. Kami bantu kamu membangun <strong>mesin penghasilan sederhana</strong>: pilih pasar → temukan masalah → buat solusi → jual → deliver → ulangi.</p>
+      <p>Target 30 hari: <strong>validasi dan penghasilan pertama</strong>. Bukan janji kaya instan — tapi sistem yang bisa kamu ulangi dan scale seiring waktu.</p>
+      <blockquote style="border-left:3px solid var(--accent);padding-left:14px;margin:16px 0;font-size:14px;color:var(--heading);font-style:italic;">
+        "Satu jalur yang dijalankan sampai menghasilkan lebih bernilai daripada 100 ide yang hanya disimpan."
+      </blockquote>
+    </div>
+
+    <!-- 4 Jalur Penghasilan -->
+    <div class="content-card">
+      <h2>Empat Jalur Penghasilan</h2>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Kamu nggak harus pilih semua. Pilih satu yang paling cocok untuk sprint pertama.</p>
+      <div class="track-grid">
+        <div class="track-card">
+          <div class="track-icon">💼</div>
+          <h4>Jasa dengan AI</h4>
+          <p>Cocok untuk pemula yang ingin cepat jual skill. Paket konten, riset, presentasi, video pendek. Uang pertama relatif cepat.</p>
+        </div>
+        <div class="track-card">
+          <div class="track-icon">📦</div>
+          <h4>Produk Digital</h4>
+          <p>Punya pengetahuan/proses yang bisa dikemas? Template, workbook, mini-course, toolkit — buat sekali, jual selamanya.</p>
+        </div>
+        <div class="track-card">
+          <div class="track-icon">🎬</div>
+          <h4>Content-led Business</h4>
+          <p>Suka bangun audiens dan konten? Affiliate, sponsor, membership, produk sendiri. Lebih lambat, tapi aset jangka panjang.</p>
+        </div>
+        <div class="track-card">
+          <div class="track-icon">⚙️</div>
+          <h4>Automasi & AI Agent</h4>
+          <p>Suka sistem & problem solving? Lead routing, FAQ assistant, reporting workflow. Nilai proyek lebih tinggi, cocok untuk B2B.</p>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-top:12px;">💡 <strong>Rekomendasi:</strong> Untuk mayoritas pemula, mulai dari Jasa. Jasa memberi feedback pasar tercepat. Setelah paham masalah pelanggan, produk digital dan automasi jadi lebih mudah dibuat.</p>
+    </div>
+
+    <!-- Untuk Siapa -->
+    <div class="content-card">
+      <h2>Untuk siapa kelas ini</h2>
+      <div class="target-grid">
+        <div class="target-item"><span class="target-emoji">🌱</span><span>Pemula yang sudah paham dasar AI dan ingin mulai menghasilkan</span></div>
+        <div class="target-item"><span class="target-emoji">💼</span><span>Profesional non-teknis yang ingin side income dari skill AI</span></div>
+        <div class="target-item"><span class="target-emoji">🎓</span><span>Lulusan AI Fundamentals yang mau naik level ke monetisasi</span></div>
+        <div class="target-item"><span class="target-emoji">🏪</span><span>Pebisnis kecil / UMKM yang ingin paham AI untuk revenue</span></div>
+        <div class="target-item"><span class="target-emoji">🔧</span><span>Problem solver yang suka sistem, automasi, dan efisiensi</span></div>
+        <div class="target-item"><span class="target-emoji">🚀</span><span>Siapa pun yang serius membangun income stream dari AI</span></div>
+      </div>
+    </div>
+
+    <!-- Kurikulum 8 Modul -->
+    <div class="content-card">
+      <h2>Kurikulum</h2>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">8 Modul · 20+ latihan praktis · 6+ jam total durasi · Project-based · <a href="/komunitech/learn/ai-income-launchpad" style="color:var(--accent);font-weight:600;">📽️ Lihat Master Deck →</a></p>
+
+      <!-- Modul 1 -->
+      <div class="curriculum-module open" onclick="this.classList.toggle('open')">
+        <div class="curriculum-module-header">
+          Modul 1: Fondasi — AI yang Menghasilkan
+          <span class="curriculum-module-meta">3 pelajaran · 45 menit</span>
+        </div>
+        <div class="curriculum-module-body">
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Rumus Nilai: dari "AI bisa apa?" ke "masalah apa yang saya selesaikan?"</span><span class="curriculum-lesson-meta">15 menit</span></div>
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">AI sebagai Copilot, bukan Mesin Kebenaran — batasan & etika praktis</span><span class="curriculum-lesson-meta">15 menit</span></div>
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">✏️</span><span class="curriculum-lesson-title">Langkah Aksi: Terapkan Workflow 5C ke satu use case nyata</span><span class="curriculum-lesson-meta">15 menit</span></div>
+        </div>
+      </div>
+
+      <!-- Modul 2 -->
+      <div class="curriculum-module" onclick="this.classList.toggle('open')">
+        <div class="curriculum-module-header">
+          Modul 2: Pilih Jalur dan Niche
+          <span class="curriculum-module-meta">3 pelajaran · 50 menit</span>
+        </div>
+        <div class="curriculum-module-body">
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Income Path Score — nilai setiap jalur 1–5 berdasarkan 5 faktor</span><span class="curriculum-lesson-meta">20 menit</span></div>
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Niche yang cukup sempit — format: Saya membantu [siapa] mendapatkan [hasil] melalui [mekanisme]</span><span class="curriculum-lesson-meta">15 menit</span></div>
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">✏️</span><span class="curriculum-lesson-title">Langkah Aksi: Lakukan 2 problem interview dengan template yang disediakan</span><span class="curriculum-lesson-meta">15 menit</span></div>
+        </div>
+      </div>
+
+      <!-- Modul 3 -->
+      <div class="curriculum-module" onclick="this.classList.toggle('open')">
+        <div class="curriculum-module-header">
+          Modul 3: Bangun Penawaran yang Mudah Dibeli
+          <span class="curriculum-module-meta">3 pelajaran · 55 menit</span>
+        </div>
+        <div class="curriculum-module-body">
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Anatomi offer — dari outcome sampai guarantee</span><span class="curriculum-lesson-meta">20 menit</span></div>
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Tangga harga 3-tier & scope yang aman — tulis jumlah output, revisi, dan pengecualian</span><span class="curriculum-lesson-meta">20 menit</span></div>
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">✏️</span><span class="curriculum-lesson-title">Langkah Aksi: Buat one-page offer untuk jalur yang kamu pilih</span><span class="curriculum-lesson-meta">15 menit</span></div>
+        </div>
+      </div>
+
+      <!-- Modul 4 -->
+      <div class="curriculum-module" onclick="this.classList.toggle('open')">
+        <div class="curriculum-module-header">
+          Modul 4: Portofolio Tanpa Menunggu Klien
+          <span class="curriculum-module-meta">3 pelajaran · 50 menit</span>
+        </div>
+        <div class="curriculum-module-body">
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">3 jenis bukti: spec sample, before-after, micro case study</span><span class="curriculum-lesson-meta">20 menit</span></div>
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Quality gate — standar minimum sebelum portofolio dipublikasi</span><span class="curriculum-lesson-meta">15 menit</span></div>
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">✏️</span><span class="curriculum-lesson-title">Langkah Aksi: Buat 3 sampel + 1 studi kasus satu halaman</span><span class="curriculum-lesson-meta">15 menit</span></div>
+        </div>
+      </div>
+
+      <!-- Modul 5 -->
+      <div class="curriculum-module" onclick="this.classList.toggle('open')">
+        <div class="curriculum-module-header">
+          Modul 5: Cari Pelanggan Pertama
+          <span class="curriculum-module-meta">3 pelajaran · 55 menit</span>
+        </div>
+        <div class="curriculum-module-body">
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Bangun daftar 100 prospek — 3 sinyal prioritas: masalah terlihat, mampu bayar, momentum berubah</span><span class="curriculum-lesson-meta">20 menit</span></div>
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Outreach yang tidak terasa spam — template & contoh nyata</span><span class="curriculum-lesson-meta">20 menit</span></div>
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">✏️</span><span class="curriculum-lesson-title">Langkah Aksi: Kirim 10 outreach pertama + setup ritme harian</span><span class="curriculum-lesson-meta">15 menit</span></div>
+        </div>
+      </div>
+
+      <!-- Modul 6 -->
+      <div class="curriculum-module" onclick="this.classList.toggle('open')">
+        <div class="curriculum-module-header">
+          Modul 6: Discovery dan Closing
+          <span class="curriculum-module-meta">3 pelajaran · 60 menit</span>
+        </div>
+        <div class="curriculum-module-body">
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Struktur discovery call 6 langkah — konteks → masalah → dampak → prioritas → keputusan → next step</span><span class="curriculum-lesson-meta">25 menit</span></div>
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Proposal ringkas & framework jawab 5 objection paling umum</span><span class="curriculum-lesson-meta">20 menit</span></div>
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">✏️</span><span class="curriculum-lesson-title">Langkah Aksi: Roleplay discovery call + tulis proposal untuk 1 prospek</span><span class="curriculum-lesson-meta">15 menit</span></div>
+        </div>
+      </div>
+
+      <!-- Modul 7 -->
+      <div class="curriculum-module" onclick="this.classList.toggle('open')">
+        <div class="curriculum-module-header">
+          Modul 7: Delivery dengan AI — Hasil Berkualitas, Sistem Rapi
+          <span class="curriculum-module-meta">3 pelajaran · 55 menit</span>
+        </div>
+        <div class="curriculum-module-body">
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">SOP delivery yang scalable — dari brief sampai handover</span><span class="curriculum-lesson-meta">20 menit</span></div>
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Prompt Brief Universal — satu template untuk semua jenis proyek</span><span class="curriculum-lesson-meta">15 menit</span></div>
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">✏️</span><span class="curriculum-lesson-title">Langkah Aksi: Deliver 1 proyek & minta testimonial secara etis</span><span class="curriculum-lesson-meta">20 menit</span></div>
+        </div>
+      </div>
+
+      <!-- Modul 8 -->
+      <div class="curriculum-module" onclick="this.classList.toggle('open')">
+        <div class="curriculum-module-header">
+          Modul 8: Naikkan Pendapatan Secara Sehat
+          <span class="curriculum-module-meta">3 pelajaran · 50 menit</span>
+        </div>
+        <div class="curriculum-module-body">
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Urutan scale: perbaiki kualitas → naikkan harga → retainer → referral → automasi</span><span class="curriculum-lesson-meta">20 menit</span></div>
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">📖</span><span class="curriculum-lesson-title">Matematika pendapatan & dashboard mingguan — pilih satu tuas utama per bulan</span><span class="curriculum-lesson-meta">15 menit</span></div>
+          <div class="curriculum-lesson"><span class="curriculum-lesson-icon">✏️</span><span class="curriculum-lesson-title">Langkah Aksi: Tulis rencana pendapatan 90 hari + setup dashboard</span><span class="curriculum-lesson-meta">15 menit</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instruktur -->
+    <div class="content-card">
+      <h2>Instruktur</h2>
+      <div class="instructor-card">
+        <div class="instructor-avatar">KT</div>
+        <div class="instructor-info">
+          <h3>Tim Komunitech</h3>
+          <div class="instructor-title">AI Practitioners & Community Builders</div>
+          <div class="instructor-stats">
+            
+            <span>🎓 50+ Workshop</span>
+          </div>
+          <div class="instructor-bio">Kami adalah komunitas AI terbesar di Indonesia. Tim kami terdiri dari praktisi yang sudah membuktikan AI bisa menghasilkan uang — bukan cuma teori. Kami percaya belajar AI harus praktikal, kontekstual, dan langsung bisa dipakai.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-banner" style="border-radius:var(--radius);margin-bottom:0;">
+      <span class="cta-banner-text">🧪 Testing mode — akses penuh gratis. Mulai belajar sekarang!</span>
+      <a href="/komunitech/learn/ai-income-launchpad" class="cta-banner-btn">Mulai Belajar Gratis →</a>
+    </div>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      
+      <div class="sidebar-body">
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:2px;">
+          <span class="sidebar-price">GRATIS</span>
+        </div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:16px;">
+          <span style="text-decoration:line-through;margin-right:4px;">Rp 2.500K</span> 🧪 Gratis — testing mode
+        </div>
+
+        <a href="/komunitech/learn/ai-income-launchpad" class="sidebar-btn primary">🎬 Mulai Belajar Gratis</a>
+        <a href="#kurikulum" class="sidebar-btn outline">Lihat Kurikulum</a>
+        <a href="/komunitech/learn/ai-income-launchpad" class="sidebar-btn outline" style="margin-top:4px;">📽️ Lihat Master Deck</a>
+
+        <div class="sidebar-guarantee">🧪 Testing mode — akses penuh gratis untuk early users</div>
+
+        <div class="sidebar-includes-title">Kelas ini termasuk:</div>
+        <ul class="sidebar-includes-list">
+          <li>📚 8 Modul lengkap (24 lessons)</li>
+          <li>📝 20+ latihan praktis</li>
+          <li>📄 Template siap pakai (offer, outreach, proposal, dll)</li>
+          <li>🎯 4 track praktik (pilih satu)</li>
+          <li>📽️ Master Deck interaktif 19 slide</li>
+          <li>🔄 Update konten gratis</li>
+          <li>💬 Akses forum diskusi</li>
+          <li>🏆 Challenge 30 Hari</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align:center;font-size:12px;color:var(--muted);margin-top:12px;">
+      💡 Baru mulai? Ambil dulu<br>
+      <a href="/komunitech/course/ai-fundamentals" style="color:var(--primary);">AI Fundamentals (Gratis) →</a>
+    </div>
+  </aside>
+</div>
+
+<footer class="mini-footer">
+  © 2026 Komunitech — Komunitas AI Indonesia. <a href="/komunitech/" style="color:var(--primary);">Kembali ke katalog</a>
+</footer>
+
+</body>
+</html>
